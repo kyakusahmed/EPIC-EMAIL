@@ -190,7 +190,8 @@ h3{
   }
   
   .left a:hover {
-    color:  #ffa500;
+    color:  orange;
+    background-color:white;
   }
   .left a.active {
     background-color: orange;
