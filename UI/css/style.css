@@ -166,7 +166,7 @@ h3{
 }
 
 .whole .left {
-    height: 430px;
+    height: 530px;
     width: 200px;
     position: relative;
     z-index: 1;
@@ -181,7 +181,7 @@ h3{
   
 .left a {
     text-decoration: none;
-    font-size: 25px;
+    font-size: 22px;
     color: white;
     display: block;
     text-align: center;
@@ -199,7 +199,8 @@ h3{
     }
   
   .right {
-    margin-left: 160px;
+    flex: 3;
+    margin-left: 10px;
     font-size: 28px;
     padding: 0px 10px;
     border: 6px solid orange;
