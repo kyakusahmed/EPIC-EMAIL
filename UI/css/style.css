@@ -1,128 +1,129 @@
-body {
-    background-color: grey;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-    min-height: 100vh;
-    }
-    .topnav {
-    overflow: hidden;
-    background-color:orange;
-    color: green;
-    padding: 0 100px;
+body{
+background-color: grey;
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+width: 100%;
+min-height: 100vh;
+}
+.topnav {
+overflow: hidden;
+background-color:orange;
+color: green;
+padding: 0 100px;
+margin: 10px;
+border-radius: 5px;
+}
+.topnav h1{
+    float: left;
+    padding: -2px;
+    color:  #ffffff;
+    font-size: 24px;
+}
+.topnav a {
+float: right;
+display: block;
+color: white;
+text-align: center;
+padding:  22px;
+text-decoration: none;
+font-size: 16px;
+}
+.topnav a:hover {
+background-color: grey;
+color: #ffffff;
+}
+.topnav a.active {
+background-color: grey;
+color: #ffffff;
+}
+
+.whole{
+    background-color: white;
+    padding: 50px;
+    display: flex;
+    margin: 10px 10px;
+    border-radius: 5px;
+}
+.one{
+    flex: 2;
+    height: 510px;
+    color: white;
+    font-size: 20px; 
     margin: 10px;
-    border-radius: 5px;
-    }
-    .topnav h1{
-        float: left;
-        padding: -2px;
-        color:  #ffffff;
-        font-size: 24px;
-    }
-    .topnav a {
-    float: right;
-    display: block;
-    color: white;
+    background-color: grey;
+    border: 6px solid orange;
+    border-radius: 10px;
+}
+.one h2{
+margin: 60px 0 20px 180px;
+}
+.one p{
+margin: 0 30px 0 40px;
+font-size: 29PX;
+}
+.two{
+    flex: 2;
+    background-color: rgb(red, green, blue);
+    height: 510px;
+}
+form{
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto 80px;
+    padding: 22px;
     text-align: center;
-    padding:  22px;
-    text-decoration: none;
-    font-size: 16px;
-    }
-    .topnav a:hover {
-    background-color: grey;
+    margin-top: 45px;
     color: #ffffff;
-    }
-    .topnav a.active {
-    background-color: grey;
-    color: #ffffff;
-    }
-    
-    .whole{
-        background-color: white;
-        padding: 50px;
-        display: flex;
-        margin: 10px 10px;
-        border-radius: 5px;
-    }
-    .one{
-        flex: 2;
-        height: 510px;
-        color: white;
-        font-size: 20px; 
-        margin: 10px;
-        background-color: grey;
-        border: 6px solid orange;
-        border-radius: 10px;
-    }
-    .one h2{
-    margin: 60px 0 20px 180px;
-    }
-    .one p{
-    margin: 0 30px 0 40px;
-    font-size: 29PX;
-    }
-    .two{
-        flex: 2;
-        background-color: rgb(red, green, blue);
-        height: 510px;
-    }
-    form{
-        position: relative;
-        z-index: 1;
-        max-width: 760px;
-        margin: 0 auto 80px;
-        padding: 22px;
-        text-align: center;
-        margin-top: 45px;
-        color: #ffffff;
-    }
-    
-    .two form input{
-    font-family: "roboto",sans-serif;
-    outline: 1;
-    background: #f2f2f2;
-    width: 80%;
-    border: 1px solid #ffa500;
-    margin: 5px;
-    padding: 15px;
-    box-sizing: border-box;
-    margin-left: 0px;
-    border-radius: 5px;
-    }
-    
-    .two input:hover{
-    border: 1px solid grey;
-    
-    }
-    
-    .two form .button{
-    font-family: "roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    width: 80%;
-    padding: 10px;
-    color: white;
-    font-size: 15PX;
-    cursor: pointer;
-    border: 1px solid orange;
-    background-color: #ffa500;
-    margin-top: 10px;
-    border-radius: 5px;
-    margin-left: -4px;
-    }
-    
-    .two form .button:hover, form button:active{
-    background-color: grey;
-    color: #ffffff;
-    }
-    form .message{
-    margin: 15px;
-    color: grey;
-    }
-    @media screen and (max-width: 800px) {
-    .whole{
-        display: block;
-        margin: auto;
-    }
-    
-    }
+}
+
+.two form input{
+font-family: "roboto",sans-serif;
+outline: 1;
+background: #f2f2f2;
+width: 80%;
+border: 1px solid #ffa500;
+margin: 5px;
+padding: 15px;
+box-sizing: border-box;
+margin-left: 0px;
+border-radius: 5px;
+}
+
+.two input:hover{
+border: 1px solid grey;
+
+}
+
+.two form .button{
+font-family: "roboto", sans-serif;
+text-transform: uppercase;
+outline: 0;
+width: 80%;
+padding: 10px;
+color: white;
+font-size: 15PX;
+cursor: pointer;
+border: 1px solid orange;
+background-color: #ffa500;
+margin-top: 10px;
+border-radius: 5px;
+margin-left: -4px;
+}
+
+.two form .button:hover, form button:active{
+background-color: grey;
+color: #ffffff;
+}
+form .message{
+margin: 15px;
+color: grey;
+}
+@media screen and (max-width: 800px) {
+.whole{
+    display: block;
+    margin: auto;
+}
+
+}
+
