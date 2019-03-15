@@ -250,3 +250,51 @@ padding: 0px 0px 0px 20px;
 .order-button a:hover {
 color:  orange;
 }
+
+input[type=text], textarea {
+width: 100%;
+padding: 12px;   
+border: 2px solid #ffa500;
+border-radius: 4px; 
+box-sizing: border-box; 
+margin-top: 3px; 
+margin-bottom: 0px;
+resize: vertical;
+}
+
+textarea{
+    height: 200px;
+}
+
+input[type=submit] {
+background-color:orange;
+color: white;
+padding: 12px 40px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 5px;
+}
+
+input[type=submit]:hover {
+background-color: #ffe600b9;
+color: grey;
+}
+
+.right form{
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto 80px;
+    padding: 22px;
+    text-align: center;
+    margin-top: 30px;
+    color: #ffffff;
+    margin-bottom: -30px;
+    }
+
+.right h4{
+    text-align: center;
+    color: grey;
+    padding-top: -50px;
+}

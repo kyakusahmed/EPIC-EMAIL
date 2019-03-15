@@ -24,8 +24,21 @@
     </div>
 
     <div class="right">
-       
+        <h4>Write new message</h4>
+        <form action="sent.html" class="add-food">
 
+            <label for="fname">To: </label>
+            <input type="text" id="fname" name="firstname" placeholder="Enter recipient email or group name..." required>
+        
+            <label for="lname">Subject</label>
+            <input type="text" id="lname" name="lastname" placeholder="Subject..." required>
+
+            <textarea id="subject" name="subject" placeholder="Write something.."></textarea required>
+        
+            <a href="sent.html"><input type="button" value="Send"></a>
+            <a href="draft.html"><input type="button" value="Save As Draft"></a>
+
+        </form>    
     </div>
 </div>            
 
