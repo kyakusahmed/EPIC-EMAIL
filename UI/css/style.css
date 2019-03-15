@@ -1,3 +1,4 @@
+
 body {
 background-color: grey;
 margin: 0;
@@ -53,6 +54,7 @@ margin: 10px;
 background-color: grey;
 border: 6px solid orange;
 border-radius: 10px;
+
 }
 .one h2{
 margin: 60px 0 20px 180px;
@@ -75,6 +77,7 @@ padding: 22px;
 text-align: center;
 margin-top: 45px;
 color: #ffffff;
+
 }
 
 .two form input{
@@ -121,8 +124,8 @@ color: grey;
 }
 @media screen and (max-width: 800px) {
 .whole{
-display: block;
-margin: auto;
+    display: block;
+    margin: auto;
 }
 }
 
@@ -143,6 +146,7 @@ padding: 12px 20px;
 border: none;
 border-radius: 4px;
 cursor: pointer;
+
 }
 
 input[type=submit]:hover {
