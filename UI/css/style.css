@@ -212,25 +212,24 @@ border-radius: 10px;
 .sidenav a {font-size: 18px;}
 }
 
-.food-item     {
+.main     {
 margin: 10px 0;
 display: flex;
 flex-direction: row;
 flex-wrap: nowrap;
 justify-content: flex-start;
-border-bottom: 2px solid green;
+border-bottom: 2px solid #ffa500;
 }
 
-
-.food-item .order-image {
+.main .content {
 flex: 1;
 }
 
-.food-item .content1 {
+.main .content1 {
 flex: 2;
 }
 
-.food-item .order-button {
+.main .order-button {
 flex: 1;
 border-bottom-style: none;
 }
@@ -282,19 +281,46 @@ color: grey;
 }
 
 .right form{
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-    margin: 0 auto 80px;
-    padding: 22px;
-    text-align: center;
-    margin-top: 30px;
-    color: #ffffff;
-    margin-bottom: -30px;
-    }
+position: relative;
+z-index: 1;
+max-width: 760px;
+margin: 0 auto 80px;
+padding: 22px;
+text-align: center;
+margin-top: 30px;
+color: #ffffff;
+margin-bottom: -30px;
+}
 
 .right h4{
     text-align: center;
     color: grey;
     padding-top: -50px;
+}
+
+.sixth .groupname p{
+    color: #808080;
+    border-bottom: 2px solid #ffa500;
+}
+
+.sixth .groupname p span{
+    padding-left: 60px;
+}
+
+.sixth .field{
+    display: inline-block;
+    margin: 0px 0 20px 0px;
+    height: 22px;
+    
+  }
+
+.field label{
+    margin-left: 0px;
+}
+.field select{
+    width: 200px;
+}
+
+.field a{
+    margin: 0px 0px 0px 20px;
 }
