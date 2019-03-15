@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Epic Email</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<meta charset="utf-8"> 
+<META name="keywords" lang="en-us" content="emails">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div class="topnav">
+    <h1>Epic Email</h1>
+    <a href="signin.html">SignOut</a>
+    <a class="active" href="#home">Main</a>
+</div>
+
+<div class="whole">
+    <div class="left">
+        <a class="active" href="#home">New Message</a>
+        <a href="main.html">Inbox<span> (4)</span></a>
+        <a href="sent.html">sent<span> (2)</span></a>
+        <a href="draft.html">Draft<span>(2)</span></a>
+        <a href="group.html">Groups<span>(2)</span></a>
+    </div>
+
+    <div class="right">
+        <h4>Write new message</h4>
+        <form action="sent.html" class="add-food">
+
+            <label for="address">To: </label>
+            <input type="text" id="address" name="address" placeholder="Enter recipient email or group name..." required>
+        
+            <label for="heading">Subject</label>
+            <input type="text" id="heading" name="heading" placeholder="Subject..." required>
+
+            <textarea id="subject" name="subject" placeholder="Write something.."></textarea required>
+        
+            <a href="sent.html"><input type="button" value="Send"></a>
+            <a href="draft.html"><input type="button" value="Save As Draft"></a>
+
+        </form>    
+    </div>
+</div>            
+
+</body>
+</html>
