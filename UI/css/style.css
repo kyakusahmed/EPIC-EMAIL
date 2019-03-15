@@ -239,38 +239,14 @@ border-bottom-style: none;
 border-bottom-style: none;
 text-decoration: none;
 color: grey;
+padding: 0px 0px 0px 20px;
+}
+
+.order-button a img{
+    width: 25px;
+    height: 25px;
 }
 
 .order-button a:hover {
 color:  orange;
 }
-
-  /* .order-button .button {
-    display: inline-block;
-    margin-top: auto;
-    padding: 5px;
-    color: #d35400;
-    font-weight: bold;
-    font-size: 12px;
-    cursor: pointer;
-    background: transparent;
-  }
-
-  .order-button .read {
-    background: #008000;
-    color: #fff;
-    border: 1px solid #90ee90;
-  }
-
-  .button {
-    font: bold 11px Arial;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    padding: 2px 6px 2px 6px;
-    border-top: 1px solid #CCCCCC;
-    border-right: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #CCCCCC;
-  
-  } */
