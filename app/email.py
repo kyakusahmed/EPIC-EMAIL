@@ -12,14 +12,14 @@ class Emails:
         self.emails = emails
 
   
-    def search_user_by_email(self, email):
+    def search_user_by_email(self, email, password):
         """Search for specific user."""
         search = [
-            item for item in self.users if item['email'] == email]
+            item for item in self.users if item['email'] == email if item['password'] == password]
         return search    
 
         
-    def add_new_user(self, email, firstname, lastname, password):
+    def add_new_user(self, firstname, lastname, email, password):
         """add new user."""
         user = {
             "id":  len(self.users)+1,
