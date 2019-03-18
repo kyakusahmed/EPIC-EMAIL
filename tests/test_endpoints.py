@@ -81,3 +81,6 @@ class EmailsTest(unittest.TestCase):
         response = self.app.post('/api/v1/users/login', json=user1)
         self.assertEqual(response.status_code, 400)
         assert json.loads(response.data)['errors']['message']== "password is required"
+
+
+  
