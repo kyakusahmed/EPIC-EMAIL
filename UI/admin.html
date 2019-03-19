@@ -8,84 +8,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
 <div class="topnav">
-    <h1>Epic Email</h1>
-    <a href="signin.html">SignOut</a>
-    <a class="active" href="#home">Main</a>
+    <div class="logo">
+        <a href="signin.html">Epic Email</a>   
+    </div>
+    <a href="signin.html" class="nav">SignOut</a>
 </div>
-
 <div class="whole">
     <div class="left">
-        <a href="new.html">New Message</a>
-        <a class="active" href="#home">Inbox<span> (4)</span></a>
-        <a href="sent.html">sent<span> (2)</span></a>
-        <a href="draft.html">Draft<span>(2)</span></a>
-        <a href="creategroup.html">Create Group</a>
-        <a href="group.html">Groups<span>(2)</span></a>
+        <a href="ad-grp.html">Groups<span>(2)</span></a>
     </div>
-
     <div class="right">
-        <h4>Emails in my Inbox</h4>
-        <div class="main">
-            <div class="content">
-                <div class="title">Biko payment</div>
-            </div>
-            <div class="content1">
-                <div class="title">Today was $50m and therefore .... </div>
-            </div>
-            <div class="order-button">
-                <a href="place_order.html" class="button">Read</a>
-                <a href="#"><img src="images/one.png" alt=""></a>
-            </div>
-            
-        </div>
-
-        <div class="main">
-            <div class="content">
-                <div class="title">Biko payment</div>
-            </div>
-            <div class="content1">
-                <div class="title">Today was $50m and therefore .... </div>
-            </div>
-            <div class="order-button">
-                <a href="place_order.html" class="button">Read</a>
-                <a href="#"><img src="images/one.png" alt=""></a>
-            </div>
-        </div>
-
-        <div class="main">
-            <div class="content">
-                <div class="title">Biko payment</div>
-            </div>
-            <div class="content1">
-                <div class="title">Today was $50m and therefore .... </div>
-            </div>
-            <div class="order-button">
-                <a href="place_order.html" class="button">UnRead</a>
-                <a href="#"><img src="images/one.png" alt=""></a>
-            </div>
-        </div>
-
-        <div class="main">
-
-            <div class="content">
-                <div class="title">Biko payment</div>
-            </div>
-
-            <div class="content1">
-                <div class="title">Today was $50m and therefore .... </div>
-            </div>
-
-            <div class="order-button">
-                <a href="place_order.html" class="button">UnRead</a>
-                <a href="#"><img src="images/one.png" alt=""></a>
-            </div>
-            
-        </div>
-
+        <form action="ad-grp.html" class="">
+            <label for="group">Create Group</label>
+            <input type="text" id="group" name="group" placeholder="enter new group name..." required>
+            <input type="submit" value="Create Group">
+        </form>    
     </div>
-</div>            
-
+</div>
 </body>
 </html>
