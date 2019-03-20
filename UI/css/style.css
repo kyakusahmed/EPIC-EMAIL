@@ -1,4 +1,3 @@
-
 body {
 background-color: white;
 margin: 0;
@@ -172,6 +171,11 @@ form .message a{
 
 }
 }
+.whole{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/black.jpg");
+    background-repeat: repeat;
+    background-size: contain;
+}
 @media screen and (max-width: 360px) {
 .whole{
     display: block;
@@ -342,6 +346,12 @@ border-bottom-style: none;
 .main {
     font-size: 14px;
 }
+.right form .sender-details p{
+    font-size:18px; 
+}
+.right form .body p{
+    font-size: 25px;
+}
 }
 .order-button a{
 border-bottom-style: none;
@@ -402,18 +412,15 @@ margin-top: 30px;
 color: #ffffff;
 margin-bottom: -30px;
 }
-
 .right h4{
     text-align: center;
     color: grey;
     padding-top: -50px;
 }
-
 .sixth .groupname p{
     color: #808080;
     border-bottom: 2px solid #f0a417;
 }
-
 .sixth .groupname p span{
     padding-left: 60px;
 }
@@ -437,4 +444,28 @@ margin-bottom: -30px;
 }
 .right h4{
     color: black;
+}
+.right form .subj p{
+    color: grey;
+    margin: 0px auto;
+    margin-top: 0px;
+}
+.right form {
+    border: 1px solid orange;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #f0a417  inset;
+}
+.right form .sender-details p{
+    color: black;
+    margin: 0px auto;
+}
+.right form .body p{
+    color: black;
+    margin: 20px auto;
+}
+.right form .subj span{
+    color: orange;
+}
+.right form .sender-details span{
+    color: #f0a417;
 }
