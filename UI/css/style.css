@@ -378,7 +378,7 @@ resize: vertical;
 box-shadow:0 0 10px #f0a417  inset;
 }
 textarea{
-    height: 200px;
+    height: 150px;
 }
 
 input[type=submit] {
@@ -410,7 +410,7 @@ padding: 22px;
 text-align: center;
 margin-top: 30px;
 color: #ffffff;
-margin-bottom: -30px;
+margin-bottom: -10px;
 }
 .right h4{
     text-align: center;
