@@ -46,5 +46,5 @@ $ python run.py
 | tasks               |    URLS                |  METHOD  |         PARAMS                                | 
 | ------------------- | -----------------------|----------|-----------------------------------------------|
 |User signup|api/v1/users|POST|firstname,lastname,email,password|
-|User signin|api/v1/users|GET|email,password|
+|User signin|api/v1/users/login|GET|email,password|
 | get all user's recieved emails|api/v1/emails/users/received|GET|None|
