@@ -47,4 +47,4 @@ $ python run.py
 | ------------------- | -----------------------|----------|-----------------------------------------------|
 |User signup|api/v1/users|POST|firstname,lastname,email,password|
 |User signin|api/v1/users|GET|email,password|
-| get all user's recieved emails|api/v1/emails/users/received|GET|id|
+| get all user's recieved emails|api/v1/emails/users/received|GET|None|
