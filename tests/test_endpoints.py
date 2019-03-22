@@ -1,4 +1,5 @@
-  def test_delete_user_emails(self):
+    
+    def test_delete_user_emails(self):
         """test delete user emails"""
         email = {
             "subject": "",
