@@ -40,9 +40,9 @@ $ python run.py
 
 ### How to run the Tests:
 
- open the terminal,activate virtual enviroment in the sendIT directory  and enter:
+ open the terminal,activate virtual enviroment in the <Root> directory  and enter:
  ```
- $ pytest 
+ $ pytest --cov
 ```
 
 
@@ -50,4 +50,10 @@ $ python run.py
 | ------------------- | -----------------------|----------|-----------------------------------------------|
 |User signup|api/v1/users|POST|firstname,lastname,email,password|
 |User signin|api/v1/users/login|GET|email,password|
-| get all user's recieved emails|api/v1/emails/users/received|GET|None|
+|Get all user's recieved emails|api/v1/emails/users/received|GET|None|
+|Get all unread emails for a user|/api/v1/emails/user/unread/<integer:id>|GET|id|
+|Get all emails sent by a user|/api/v1/emails/user/sent/<integer:id>|GET|id|
+|Get a specific user’s email|/api/v1/emails/specific-user/<integer:id>|GET|id|
+|Send email to individuals|/api/v1/emails/user/<integer:id>|POST|id|
+|Delete an email in a user’s inbox|/api/v1/emails/user/delete/<integer:id>|DELETE|id|
+
