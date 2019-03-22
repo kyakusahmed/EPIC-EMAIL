@@ -22,11 +22,6 @@ class EmailsTest(unittest.TestCase):
         }
         response = self.app.post('/api/v1/users', json=user)
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(
-            json.loads(
-                response.data.decode
-                ('utf-8')).get('data')[0]['message'],
-                "user registration successful")
 
     def test_add_new_user_already_exists(self):
         """test add new user exists."""
