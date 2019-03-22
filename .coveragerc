@@ -20,6 +20,7 @@ omit =
     */env/*
     *//home/travis/virtualenv/*
     */virtualenv/*
+    */lib/*
 
     */decimal.py
     */asyncio.py

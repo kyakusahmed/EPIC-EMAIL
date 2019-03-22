@@ -8,7 +8,7 @@ class Validation:
     """class for validating data"""
     def __init__(self):
         self.input_data = input_data
-        
+
     def input_data_validation(self, input_data):
             """Search for x and check if input is an empty string."""
             for x in input_data:
