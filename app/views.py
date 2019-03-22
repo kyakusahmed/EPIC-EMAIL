@@ -86,3 +86,10 @@ def get_all_user_received_emails(id):
 def get_specific_user_email(id):
     """get specific user's email"""
     return jsonify({"status": 200, "specific user email": emails.get_specific_user_email(id, 'email_id')})
+  
+  
+@app.route('/api/v1/emails/user/unread/<int:id>', methods=['GET'])
+def get_all_user_unread_emails(id):
+    """fetch all user unread emails"""
+    return jsonify({"unread-emails": emails.get_user_unread_email(id, 'read'), "status": 200}), 200  
+  
