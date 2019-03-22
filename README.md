@@ -5,6 +5,10 @@
 
 # EPIC-EMAIL
  A web app that helps people exchange messages/information over the internet.
+ 
+ [HEROKU](https://epemail.herokuapp.com/)
+ 
+ [API DOCUMENTATION](https://epemail.herokuapp.com/apidocs/#/)
 
 ### How to run the app
 
@@ -48,12 +52,12 @@ $ python run.py
 
 | tasks               |    URLS                |  METHOD  |         PARAMS                                | 
 | ------------------- | -----------------------|----------|-----------------------------------------------|
-|User signup|api/v1/users|POST|firstname,lastname,email,password|
-|User signin|api/v1/users/login|GET|email,password|
-|Get all user's recieved emails|api/v1/emails/users/received|GET|None|
-|Get all unread emails for a user|/api/v1/emails/user/unread/<integer:id>|GET|id|
-|Get all emails sent by a user|/api/v1/emails/user/sent/<integer:id>|GET|id|
-|Get a specific user’s email|/api/v1/emails/specific-user/<integer:id>|GET|id|
-|Send email to individuals|/api/v1/emails/user/<integer:id>|POST|id|
-|Delete an email in a user’s inbox|/api/v1/emails/user/delete/<integer:id>|DELETE|id|
+|User signup|api/v1/users|POST| firstname,lastname,email,password|
+|User signin|api/v1/users/login|GET| email,password|
+|Get all user's recieved emails|api/v1/emails/users/received|GET| None|
+|Get all unread emails for a user|/api/v1/emails/user/unread/<integer:id>|GET| id|
+|Get all emails sent by a user|/api/v1/emails/user/sent/<integer:id>|GET| id|
+|Get a specific user’s email|/api/v1/emails/specific-user/<integer:id>|GET| id|
+|Send email to individuals|/api/v1/emails/user/<integer:id>|POST| subject, message, status, sender_id, receiver_id, |
+|Delete an email in a user’s inbox|/api/v1/emails/user/delete/<integer:id>|DELETE| id|
 
