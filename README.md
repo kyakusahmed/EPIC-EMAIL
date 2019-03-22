@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/kyakusahmed/EPIC-EMAIL.svg?branch=challenge-2%2Fapi)](https://travis-ci.org/kyakusahmed/EPIC-EMAIL)
+
+
 # EPIC-EMAIL
  A web app that helps people exchange messages/information over the internet.
 
