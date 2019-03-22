@@ -44,7 +44,7 @@ $ python run.py
 
 ### How to run the Tests:
 
- open the terminal,activate virtual enviroment in the <Root> directory  and enter:
+ open the terminal,activate virtual enviroment in the Root directory  and enter:
  ```
  $ pytest --cov
 ```
