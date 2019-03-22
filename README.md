@@ -52,7 +52,7 @@ $ python run.py
 
 | tasks               |    URLS                |  METHOD  |         PARAMS                                | 
 | ------------------- | -----------------------|----------|-----------------------------------------------|
-|User signup|api/v1/users|POST| firstname,lastname,email,password|
+|Create new account|api/v1/users/signup|POST| firstname,lastname,email,password|
 |User signin|api/v1/users/login|GET| email,password|
 |Get all user's recieved emails|api/v1/emails/users/received|GET| None|
 |Get all unread emails for a user|/api/v1/emails/user/unread/<integer:id>|GET| id|
