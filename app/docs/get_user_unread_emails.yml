@@ -1,0 +1,22 @@
+Get user unread emails.
+---
+tags:
+  - emails
+
+parameters:
+  - in: path
+    name: id
+    required: true
+    type: integer
+    description: This route is used to get user received emails. 
+
+
+responses:
+  200:
+    description: dictionary
+    
+  404:
+    description: Order Not found
+
+  401:
+    description: Unauthorization error

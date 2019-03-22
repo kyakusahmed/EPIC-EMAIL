@@ -1,0 +1,35 @@
+Authentication docs
+---
+tags:
+  - User Authentication
+parameters:
+  - in: body
+    name: body
+    type: object
+    description: This endpoint is for the User to create an account. The user provides firstname, lastname, email, password  for them to signup
+
+    schema:
+      required:
+        - firstname
+        - lastname
+        - email
+        - password
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: kyakus
+        last_name:
+          type: string
+          example: ahmad
+        email:
+          type: string
+          example: kyakusahmed@outlook.com
+        password:
+          type: string
+          example: 1988ch
+responses:
+  201:
+    description: User's firstname, lastname, email, password for them to signup
+  400:
+    description: Empty fields or invalid email or short password.
