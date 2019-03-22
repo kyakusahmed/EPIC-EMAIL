@@ -1,3 +1,4 @@
+
 from datetime import datetime
 
 users = []
@@ -23,6 +24,21 @@ class Emails:
         }
         self.users.append(user)
         return user
+      
+    def send_email(self, subject, message, status, sender_id, receiver_id):
+        """add new email."""
+        email = {
+            "email_id":  len(self.emails)+1,
+            "createdOn": str(datetime.now()),
+            "subject": subject,
+            "message": message,
+            "status": status,
+            "sender_id": sender_id,
+            "receiver_id": receiver_id,
+            "read": False
+        }
+        self.emails.append(email)
+        return email
 
     def get_user_email(self, user_id):
         """get user email."""
@@ -70,8 +86,3 @@ class Emails:
         search = [
             item for item in self.users if item['id'] == id]
         return search 
-
-
-
-
-
