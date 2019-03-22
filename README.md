@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/kyakusahmed/EPIC-EMAIL.svg?branch=challenge-2%2Fapi)](https://travis-ci.org/kyakusahmed/EPIC-EMAIL)
+[![Coverage Status](https://coveralls.io/repos/github/kyakusahmed/EPIC-EMAIL/badge.svg?branch=challenge-2%2Fapi)](https://coveralls.io/github/kyakusahmed/EPIC-EMAIL?branch=challenge-2%2Fapi)
 
 
 # EPIC-EMAIL
