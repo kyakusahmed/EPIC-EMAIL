@@ -58,6 +58,6 @@ $ python run.py
 |Get all unread emails for a user|/api/v1/emails/user/unread/<integer:id>|GET| id|
 |Get all emails sent by a user|/api/v1/emails/user/sent/<integer:id>|GET| id|
 |Get a specific user’s email|/api/v1/emails/specific-user/<integer:id>|GET| id|
-|Send email to individuals|/api/v1/emails/user/<integer:id>|POST| subject, message, status, sender_id, receiver_id, |
+|Send email to individuals|/api/v1/emails/user|POST| subject, message, status, sender_id, receiver_id, |
 |Delete an email in a user’s inbox|/api/v1/emails/user/delete/<integer:id>|DELETE| id|
 
