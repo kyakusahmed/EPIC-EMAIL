@@ -80,7 +80,80 @@ class EmailsTest(unittest.TestCase):
         response = self.app.post('/api/v1/users', json=user)
         self.assertEqual(response.status_code, 400)
 
-      def test_send_email_to_user(self):
+    def test_user_login(self):
+        """Test successful login"""
+        user = {
+            "firstname": "joel",
+            "lastname": "joe",
+            "email": "kyakusahmed@out.com",
+            "password": "1988ch"
+        }
+        self.app.post('/api/v1/users', json=user)
+        user1 = {
+            "email": "kyakusahmed@out.com",
+            "password": "1988ch"
+        }
+        response = self.app.post('/api/v1/users/login', json=user1)
+        self.assertEqual(response.status_code, 200)
+        # assert json.loads(response.data)['check_user'] == list
+
+
+    def test_user_login_with_invalid_email(self):
+        """Test successful login"""
+        user = {
+            "firstname": "joel",
+            "lastname": "joe",
+            "email": "kyakusahmed@out.com",
+            "password": "1988ch"
+        }
+        self.app.post('/api/v1/users', json=user)
+        user1 = {
+            "email": "kyakusahmed@out",
+            "password": "1988ch"
+        }
+        response = self.app.post('/api/v1/users/login', json=user1)
+        self.assertEqual(response.status_code, 400)
+        assert json.loads(response.data)['errors']['message'] == "invalid email"
+        assert json.loads(response.data)['errors']['field'] == "email"
+
+
+    def test_user_login_with_short_password(self):
+        """Test login with short password"""
+        user = {
+            "firstname": "joel",
+            "lastname": "joe",
+            "email": "kyakusahmed@out.com",
+            "password": "1988ch"
+        }
+        self.app.post('/api/v1/users', json=user)
+        user1 = {
+            "email": "kyakusahmed@out.com",
+            "password": "19"
+        }
+        response = self.app.post('/api/v1/users/login', json=user1)
+        self.assertEqual(response.status_code, 400)
+        assert json.loads(response.data)['errors']== "password should be atleast five characters"
+
+
+    def test_user_login_with_field_missing(self):
+        """Test login with short password"""
+        user = {
+            "firstname": "joel",
+            "lastname": "joe",
+            "email": "kyakusahmed@out.com",
+            "password": "1988ch"
+        }
+        self.app.post('/api/v1/users', json=user)
+        user1 = {
+            "email": "kyakusahmed@out.com",
+            "password": ""
+        }
+        response = self.app.post('/api/v1/users/login', json=user1)
+        self.assertEqual(response.status_code, 400)
+        assert json.loads(response.data)['errors']['message']== "password is required"
+    
+
+    def test_send_email_to_user(self):
         """send an email to a user"""
         email = {
             "subject": "ASKJBFIWBFA",
@@ -113,27 +186,9 @@ class EmailsTest(unittest.TestCase):
         }
         response = self.app.post('/api/v1/emails/user/1', json=email)
         self.assertEqual(response.status_code, 400)
-          
-         
-    def test_get_all_inbox_emails(self):
-        token = self.return_user_token()
-        response = self.app.get('/api/v1/email/inbox/1', headers={"Authorization": "Bearer " + token})
-        self.assertEqual(response.status_code, 200)
-
-    def test_get_all_user_sent_emails(self):
-        """test get user sent emails"""
-        email = {
-            "subject": "",
-            "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent",
-            "sender_id": 2
-        }
-        self.app.post('/api/v1/emails/user/1', json=email)
-        response = self.app.delete('/api/v1/emails/user/sent/2')
-        self.assertEqual(response.status_code, 200)
         
         
-     def test_get_specific_user_email(self):
+    def test_get_specific_user_email(self):
         """test get specific user email"""
         email = {
             "subject": "",
@@ -146,7 +201,7 @@ class EmailsTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         
         
-     def test_get_all_user_unread_emails(self):
+    def test_get_all_user_unread_emails(self):
         """test user gets unread emails"""
         email = {
             "subject": "",
@@ -154,6 +209,6 @@ class EmailsTest(unittest.TestCase):
             "status": "sent",
             "sender_id": 2
         }
-        self.app.post('/api/v1/emails/user/1', json=email
+        self.app.post('/api/v1/emails/user/1', json=email)
         response = self.app.get('/api/v1/emails/user/unread/1')
         self.assertEqual(response.status_code, 200)

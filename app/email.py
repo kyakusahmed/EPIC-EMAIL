@@ -66,7 +66,7 @@ class Emails:
 
     def search_for_email(self, receiver_id):
         email = [
-            item for item in self.emails if item['receiver_id'] == reciever_id]
+            item for item in self.emails if item['receiver_id'] == receiver_id]
         return email
 
 

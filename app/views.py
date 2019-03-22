@@ -37,9 +37,29 @@ def add_new_user():
     )
     new_user = [{
         "user_id": user['id'],
-        "message": "user registration successful"
+        "user": user
         }]
     return jsonify({"data": new_user, "status": 201}), 201
+
+
+@app.route('/api/v1/users/login', methods=['POST'])
+def user_login():
+    """Login User."""
+    validate_credentials = validator.input_data_validation([
+        'email', 'password'
+        ])
+    if validate_credentials:
+        return jsonify({
+            "message": 'Validation error',
+            "errors": validate_credentials
+        }), 400
+    data = request.get_json()
+    check_user = emails.search_user_by_email(
+        data['email'].strip(), data['password'])
+    if not check_user:
+        return jsonify({"status": 200, "message": "wrong password or email"}), 200
+    return jsonify({'user': check_user, 'status': 200}), 200
+
   
   
 @app.route('/api/v1/emails/user/<int:id>', methods=['POST'])
