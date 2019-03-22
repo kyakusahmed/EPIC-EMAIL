@@ -9,7 +9,6 @@ class Validation:
     def __init__(self):
         self.input_data = input_data
         
-        
     def input_data_validation(self, input_data):
             """Search for x and check if input is an empty string."""
             for x in input_data:
@@ -23,4 +22,3 @@ class Validation:
                 elif x.strip() == 'password' and len(input[x].strip()) < 5:
                     message = 'password should be atleast five characters'
                     return message
-

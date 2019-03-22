@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 from app.email import Emails
 from app.validator import Validation
 
-
 app = Flask(__name__)
 emails = Emails()
 validator = Validation()
@@ -77,3 +76,7 @@ def send_email_to_user(id):
     return jsonify({"data": [email_send], "status": 201}), 201
 
 
+@app.route('/api/v1/emails/user/received/<int:id>', methods=['GET'])
+def get_all_user_received_emails(id):
+    """fetch all user emails"""
+    return jsonify({"sent-emails": emails.get_user_email(id), "status": 200}), 200

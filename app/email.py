@@ -1,4 +1,3 @@
-
 from datetime import datetime
 
 users = []
@@ -12,7 +11,13 @@ class Emails:
         self.users = users
         self.emails = emails
 
-
+        
+    def search_user_by_id(self, id):
+        """Search for specific user."""
+        search = [
+            item for item in self.users if item['id'] == id]
+        return search 
+        
     def add_new_user(self, email, firstname, lastname, password):
         """add new user."""
         user = {
@@ -86,3 +91,4 @@ class Emails:
         search = [
             item for item in self.users if item['id'] == id]
         return search 
+
