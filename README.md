@@ -4,8 +4,6 @@
 ### How to run the app
 
 
-Make sure that python 3.6 is installed on your computer
-
 Clone the repo
 ```
 git clone https://github.com/kyakusahmed/EPIC-EMAIL.git
