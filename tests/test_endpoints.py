@@ -154,6 +154,6 @@ class EmailsTest(unittest.TestCase):
             "status": "sent",
             "sender_id": 2
         }
-        self.app.post('/api/v1/emails/user/1', json=email)
+        self.app.post('/api/v1/emails/user/1', json=email
         response = self.app.get('/api/v1/emails/user/unread/1')
         self.assertEqual(response.status_code, 200)
