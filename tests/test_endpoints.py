@@ -12,3 +12,15 @@ class EmailsTest(BaseTest):
         response = self.app.get('/api/v1/email/inbox/1', headers={"Authorization": "Bearer " + token})
         self.assertEqual(response.status_code, 200)
 
+    def test_get_all_user_sent_emails(self):
+        """test get user sent emails"""
+        email = {
+            "subject": "",
+            "message": "UIWQUKAJSFIUQNSA",
+            "status": "sent",
+            "sender_id": 2
+        }
+        self.app.post('/api/v1/emails/user/1', json=email)
+        response = self.app.delete('/api/v1/emails/user/sent/2')
+        self.assertEqual(response.status_code, 200)
+
