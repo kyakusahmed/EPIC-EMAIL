@@ -4,6 +4,7 @@
 
 
 # EPIC-EMAIL
+
  A web app that helps people exchange messages/information over the internet.
  
  [HEROKU](https://epemail.herokuapp.com/)
@@ -60,4 +61,26 @@ $ python run.py
 |Get a specific user’s email|/api/v1/emails/specific-user/<integer:id>|GET| id|
 |Send email to individuals|/api/v1/emails/user|POST| subject, message, status, sender_id, receiver_id, |
 |Delete an email in a user’s inbox|/api/v1/emails/user/delete/<integer:id>|DELETE| id|
+
+
+[GH-PAGES](https://kyakusahmed.github.io/EPIC-EMAIL/UI/signin.html)
+
+
+Features as an Admin:
+
+-   Create a group
+-   Add different users to the group.
+
+Features User side:
+
+-   Signup page using personal credentials.
+-   Login page using Email and Password.
+-   Get all received emails for a user.
+-   Get all unread emails for a user.
+-   Get all emails sent by a user.
+-   Get a specific user’s email.
+-   Send email to individuals.
+-   Delete an email in a user’s inbox.
+
+
 
