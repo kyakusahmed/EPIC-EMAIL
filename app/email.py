@@ -1,5 +1,3 @@
-
-
 def send_email(self, subject, message, status, sender_id, receiver_id):
         """add new email."""
         email = {

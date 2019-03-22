@@ -1,4 +1,3 @@
-
 @app.route('/api/v1/emails/user/<int:id>', methods=['POST'])
 def send_email_to_user(id):
     """send email to a user."""
