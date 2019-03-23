@@ -1,37 +1,49 @@
 import unittest
 import json
-from app.views import app
+from app import app
 
 
-class EmailsTest(unittest.TestCase):
+class AuthTest(unittest.TestCase):
     """Tests for Emails."""
 
     def setUp(self):
         self.app = app.test_client()
         self.app.testing = True
+        self.create_user = {
+            "first_name": "ahmad",
+            "last_name": "kyakus", 
+            "email": "kyakusahmed@gmail.com", 
+            "password": "ch1988"
+            }
+
+    def test_index(self):
+        """test open route"""
+        response = self.app.get('/')
+        assert response.status_code == 200
+        assert json.loads(response.data)['message']== "welcome to Epic Email."
 
     def test_create_user_account(self):
         """test add new user."""
-        user = {
+        user_info = {
             "id": 1,
             "email": "kyakuluahmed@gmail.com",
             "firstname": "ahmed",
             "lastname": "kyakus",
             "password": "ch1988"
         }
-        response = self.app.post('/api/v1/users/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user_info)
         self.assertEqual(response.status_code, 201)
 
     def test_create_user_account_already_exists(self):
         """test add new user exists."""
-        user = {
+        user_info = {
             "id": 1,
             "email": "kyakuluahmed@gmail.com",
             "firstname": "ahmed",
             "lastname": "kyakus",
             "password": "ch1988"
         }
-        response = self.app.post('/api/v1/users/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user_info)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             json.loads(
@@ -40,17 +52,17 @@ class EmailsTest(unittest.TestCase):
 
     def test_create_user_account_with_invalid_email(self):
         """test add new user with invalid email."""
-        user = {
+        user_info = {
             "id": 1,
-            "email": "kyakuluahmedgmail.com",
+            "email": "kyakuluahmedgmail.",
             "firstname": "ahmed",
             "lastname": "kyakus",
             "password": "ch1988"
         }
-        response = self.app.post('/api/v1/users/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user_info)
         self.assertEqual(response.status_code, 400)
 
-    def test_add_create_user_account_missing_firstname(self):
+    def test_create_user_account_missing_firstname(self):
         """test add new user missing firstname field."""
         user = {
             "id": 1,
@@ -59,10 +71,10 @@ class EmailsTest(unittest.TestCase):
             "lastname": "kyakus",
             "password": "ch1988"
         }
-        response = self.app.post('/api/v1/users/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user)
         self.assertEqual(response.status_code, 400)
 
-    def test_add_create_user_account_with_short_password(self):
+    def test_create_user_account_with_short_password(self):
         """test add new user with password too short."""
         user = {
             "id": 1,
@@ -71,137 +83,91 @@ class EmailsTest(unittest.TestCase):
             "lastname": "kyakus",
             "password": "ch"
         }
-        response = self.app.post('/api/v1/users/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user)
         self.assertEqual(response.status_code, 400)
 
     def test_user_login(self):
         """Test successful login"""
-        user = {
+        user_info = {
             "firstname": "joel",
             "lastname": "joe",
             "email": "kyakusahmed@out.com",
             "password": "1988ch"
         }
-        self.app.post('/api/v1/users', json=user)
-        user1 = {
+        self.app.post('/api/v1/auth/signup', json=user_info)
+        user_info = {
             "email": "kyakusahmed@out.com",
             "password": "1988ch"
         }
-        response = self.app.post('/api/v1/users/login', json=user1)
+        response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 200)
+
+
+    def test_user_login_with_wrong_password_or_email(self):
+        """Test successful login"""
+        user_info = {
+            "firstname": "joel",
+            "lastname": "joe",
+            "email": "kyakusahmed@out.com",
+            "password": "1988ch"
+        }
+        self.app.post('/api/v1/auth/signup', json=user_info)
+        user_info = {
+            "email": "kyakusahd@outlook.com",
+            "password": "19ch88"
+        }
+        response = self.app.post('/api/v1/auth/login', json=user_info)
+        self.assertEqual(response.status_code, 200)    
 
     def test_user_login_with_invalid_email(self):
         """Test successful login"""
-        user = {
+        user_info = {
             "firstname": "joel",
             "lastname": "joe",
             "email": "kyakusahmed@out.com",
             "password": "1988ch"
         }
-        self.app.post('/api/v1/users', json=user)
-        user1 = {
+        self.app.post('/api/v1/auth/signup', json=user_info)
+        user_info = {
             "email": "kyakusahmed@out",
             "password": "1988ch"
         }
-        response = self.app.post('/api/v1/users/login', json=user1)
+        response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 400)
         assert json.loads(response.data)['errors']['message'] == "invalid email"
         assert json.loads(response.data)['errors']['field'] == "email"
 
     def test_user_login_with_short_password(self):
         """Test login with short password"""
-        user = {
+        user_info = {
             "firstname": "joel",
             "lastname": "joe",
             "email": "kyakusahmed@out.com",
             "password": "1988ch"
         }
-        self.app.post('/api/v1/users', json=user)
-        user1 = {
+        self.app.post('/api/v1/auth/signup', json=user_info)
+        user_info = {
             "email": "kyakusahmed@out.com",
             "password": "19"
         }
-        response = self.app.post('/api/v1/users/login', json=user1)
+        response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 400)
         assert json.loads(response.data)['errors']== "password should be atleast five characters"
 
 
     def test_user_login_with_field_missing(self):
         """Test login with short password"""
-        user = {
+        user_info = {
             "firstname": "joel",
             "lastname": "joe",
             "email": "kyakusahmed@out.com",
             "password": "1988ch"
         }
-        self.app.post('/api/v1/users', json=user)
-        user1 = {
+        self.app.post('/api/v1/auth/signup', json=user_info)
+        user_info = {
             "email": "kyakusahmed@out.com",
             "password": ""
         }
-        response = self.app.post('/api/v1/users/login', json=user1)
+        response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 400)
         assert json.loads(response.data)['errors']['message']== "password is required"
-
-    def test_send_email_to_user(self):
-        """send an email to a user"""
-        email = {
-            "subject": "ASKJBFIWBFA",
-            "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent",
-            "sender_id": 3,
-            "receiver_id": 1
-        }
-        response = self.app.post('/api/v1/emails/user', json=email)
-        self.assertEqual(response.status_code, 201)
-        self.assertIsInstance(json.loads(response.data.decode('utf-8')).get('data'), list)
-    
-    def test_send_email_to_user_doesnot_exist(self):
-        """send an email to a user who does not exist"""
-        email = {
-            "subject": "ASKJBFIWBFA",
-            "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent",
-            "sender_id": 1,
-            "receiver_id": 3
-        }
-        response = self.app.post('/api/v1/emails/user', json=email)
-        self.assertEqual(response.status_code, 200)
-
-    def test_send_email_to_user_with_missing_field(self):
-        """send an email to a user with a missing field"""
-        email = {
-            "subject": "",
-            "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent",
-            "sender_id": "hjy",
-            "receiver_id": 1
-        }
-        response = self.app.post('/api/v1/emails/user', json=email)
-        self.assertEqual(response.status_code, 400)
-        
-        
-    def test_get_specific_user_email(self):
-        """test get specific user email"""
-        email = {
-            "subject": "",
-            "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent",
-            "sender_id": 2
-        }
-        self.app.post('/api/v1/emails/user/1', json=email)
-        response = self.app.get('/api/v1/emails/specific-user/2')
-        self.assertEqual(response.status_code, 200)
-        
-        
-    def test_get_all_user_unread_emails(self):
-        """test user gets unread emails"""
-        email = {
-            "subject": "",
-            "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent",
-            "sender_id": 2
-        }
-        self.app.post('/api/v1/emails/user/1', json=email)
-        response = self.app.get('/api/v1/emails/user/unread/1')
-        self.assertEqual(response.status_code, 200)

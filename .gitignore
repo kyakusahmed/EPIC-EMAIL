@@ -8,3 +8,4 @@ tests/__init__.pyc
 .pytest_cache/*
 .coverage
 venv
+epic
