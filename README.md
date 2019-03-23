@@ -55,12 +55,12 @@ $ python run.py
 | ------------------- | -----------------------|----------|-----------------------------------------------|
 |Create new account|api/v1/users/signup|POST| firstname,lastname,email,password|
 |User signin|api/v1/users/login|GET| email,password|
-|Get all user's recieved emails|api/v1/emails/users/received|GET| None|
-|Get all unread emails for a user|/api/v1/emails/user/unread/<integer:id>|GET| id|
-|Get all emails sent by a user|/api/v1/emails/user/sent/<integer:id>|GET| id|
-|Get a specific user’s email|/api/v1/emails/specific-user/<integer:id>|GET| id|
-|Send email to individuals|/api/v1/emails/user|POST| subject, message, status, sender_id, receiver_id, |
-|Delete an email in a user’s inbox|/api/v1/emails/user/delete/<integer:id>|DELETE| id|
+|Get all user's recieved emails|api/v1/messages/received|GET| None|
+|Get all unread emails for a user|/api/v1/messages/unread|GET| None|
+|Get all emails sent by a user|/api/v1/messages/sent|GET| None|
+|Get a specific user’s email|/api/v1/emails/messages/<integer:id>|GET| id|
+|Send email to individuals|/api/v1/messages|POST| subject, message, status, sender_id, receiver_id, read |
+|Delete an email in a user’s inbox|/api/v1/message/delete/<integer:id>|DELETE| id|
 
 
 [GH-PAGES](https://kyakusahmed.github.io/EPIC-EMAIL/UI/signin.html)
