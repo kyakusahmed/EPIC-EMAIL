@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
 from app import app
-from app.models.messages import Messages 
+from app.views.auth import User 
+from app.models.messages import Messages
 from app.views.validator import Validation
 
 
 messages = Messages()
+user = User()
 validator = Validation()
 
 
@@ -29,7 +31,7 @@ def send_message_to_user():
         return jsonify({
             "status": 400, "message": "you can not send an email to yourself"
             }), 400
-    user_search = messages.search_user_by_id(data['receiver_id'])
+    user_search = user.search_user_by_id(data['receiver_id'])
     if not user_search:
         return jsonify({
             "status": 404, "message": "user does not exist"
@@ -55,16 +57,6 @@ def get_user_received_messages():
         }), 200
 
 
-@app.route('/api/v1/messages/<int:id>', methods=['GET'])
-# @swag_from('../docs/get_specific_user_email.yml')
-def get_specific_user_message(id):
-    """get specific user's email"""
-    return jsonify({
-        "status": 200,
-        "specific user email": messages.get_specific_user_message(id, 'email_id')
-        }), 200
-
-
 @app.route('/api/v1/messages/unread', methods=['GET'])
 # @swag_from('../docs/get_user_unread_emails.yml')
 def get_all_user_unread_emails( ):
@@ -84,10 +76,21 @@ def get_user_sent_messages():
                 }), 200
 
 
-@app.route('/api/v1/messages/delete/<int:id>', methods=['DELETE'])
+@app.route('/api/v1/messages/delete/<int:message_id>', methods=['DELETE'])
 # @swag_from('../docs/delete_user_inbox_email.yml')
-def delete_user_message(id):
+def delete_user_message(message_id):
     """delete user's message"""
     return jsonify({
-        "message": messages.delete_user_message(id), "status": 200
+        "deleted_message": messages.delete_message(message_id), "status": 200
         }), 200
+
+
+@app.route('/api/v1/messages/<int:message_id>', methods=['GET'])
+# @swag_from('../docs/get_specific_user_email.yml')
+def get_specific_user_message(message_id):
+    """get specific user's email"""
+    return jsonify({
+        "status": 200,
+        "specific user email": messages.get_specific_message(message_id)
+        }), 200
+

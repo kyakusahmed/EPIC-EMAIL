@@ -106,7 +106,7 @@ class MessagesTest(unittest.TestCase):
         """test delete user message"""
         response = self.app.delete('/api/v1/messages/delete/1000')
         assert json.loads(
-            response.data)['message'] == "message does not exist"
+            response.data)['deleted_message'] == []
 
 
     def test_get_user_sent_messages(self):

@@ -27,3 +27,9 @@ class User:
             item for item in self.users
             if item['email'] == email if item['password'] == password]
         return search
+
+    def search_user_by_id(self, id):
+        """Search for specific user."""
+        search = [
+            item for item in self.users if item['id'] == id]
+        return search
