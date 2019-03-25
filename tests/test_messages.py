@@ -34,7 +34,7 @@ class MessagesTest(unittest.TestCase):
 
     def test_send_message_to_user_doesnot_exist(self):
         """send an email to a user who does not exist"""
-        email = {
+        message_info = {
             "subject": "ASKJBFIWBFA",
             "message": "UIWQUKAJSFIUQNSA",
             "status": "sent",
@@ -42,7 +42,7 @@ class MessagesTest(unittest.TestCase):
             "receiver_id": 9,
             "read": False
         }
-        response = self.app.post('/api/v1/messages', json=email)
+        response = self.app.post('/api/v1/messages', json=message_info)
         self.assertEqual(response.status_code, 404)
         assert json.loads(response.data)['message'] == "user does not exist"
 
