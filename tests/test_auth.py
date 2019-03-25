@@ -11,8 +11,8 @@ class AuthTest(unittest.TestCase):
         self.app.testing = True
         self.create_user = {
             "first_name": "ahmad",
-            "last_name": "kyakus", 
-            "email": "kyakusahmed@gmail.com", 
+            "last_name": "kyakus",
+            "email": "kyakusahmed@gmail.com",
             "password": "ch1988"
             }
 
@@ -20,7 +20,7 @@ class AuthTest(unittest.TestCase):
         """test open route"""
         response = self.app.get('/')
         assert response.status_code == 200
-        assert json.loads(response.data)['message']== "welcome to Epic Email."
+        assert json.loads(response.data)['message'] == "welcome to Epic Email."
 
     def test_create_user_account(self):
         """test add new user."""
@@ -47,7 +47,8 @@ class AuthTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             json.loads(
-                response.data.decode('utf-8')).get('message'), "user registered already"
+                response.data.decode('utf-8')).get(
+                    'message'), "user registered already"
                 )
 
     def test_create_user_account_with_invalid_email(self):
@@ -64,29 +65,29 @@ class AuthTest(unittest.TestCase):
 
     def test_create_user_account_missing_firstname(self):
         """test add new user missing firstname field."""
-        user = {
+        user_info = {
             "id": 1,
             "email": "kyakuluahmed@gmail.com",
             "firstname": "",
             "lastname": "kyakus",
             "password": "ch1988"
         }
-        response = self.app.post('/api/v1/auth/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user_info)
         self.assertEqual(response.status_code, 400)
 
     def test_create_user_account_with_short_password(self):
         """test add new user with password too short."""
-        user = {
+        user_info = {
             "id": 1,
             "email": "kyakuluahmed@gmail.com",
             "firstname": "ahmed",
             "lastname": "kyakus",
             "password": "ch"
         }
-        response = self.app.post('/api/v1/auth/signup', json=user)
+        response = self.app.post('/api/v1/auth/signup', json=user_info)
         self.assertEqual(response.status_code, 400)
 
-    def test_user_login(self):
+    def test_signin_user(self):
         """Test successful login"""
         user_info = {
             "firstname": "joel",
@@ -102,8 +103,7 @@ class AuthTest(unittest.TestCase):
         response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 200)
 
-
-    def test_user_login_with_wrong_password_or_email(self):
+    def test_signin_user_with_wrong_password_or_email(self):
         """Test successful login"""
         user_info = {
             "firstname": "joel",
@@ -117,9 +117,9 @@ class AuthTest(unittest.TestCase):
             "password": "19ch88"
         }
         response = self.app.post('/api/v1/auth/login', json=user_info)
-        self.assertEqual(response.status_code, 200)    
+        self.assertEqual(response.status_code, 200)
 
-    def test_user_login_with_invalid_email(self):
+    def test_signin_user_with_invalid_email(self):
         """Test successful login"""
         user_info = {
             "firstname": "joel",
@@ -134,10 +134,11 @@ class AuthTest(unittest.TestCase):
         }
         response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 400)
-        assert json.loads(response.data)['errors']['message'] == "invalid email"
+        assert json.loads(
+            response.data)['errors']['message'] == "invalid email"
         assert json.loads(response.data)['errors']['field'] == "email"
 
-    def test_user_login_with_short_password(self):
+    def test_siginin_user_with_short_password(self):
         """Test login with short password"""
         user_info = {
             "firstname": "joel",
@@ -152,10 +153,11 @@ class AuthTest(unittest.TestCase):
         }
         response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 400)
-        assert json.loads(response.data)['errors']== "password should be atleast five characters"
+        assert json.loads(
+            response.data)[
+                'errors'] == "password should be atleast five characters"
 
-
-    def test_user_login_with_field_missing(self):
+    def test_sigin_user_with_field_missing(self):
         """Test login with short password"""
         user_info = {
             "firstname": "joel",
@@ -170,4 +172,5 @@ class AuthTest(unittest.TestCase):
         }
         response = self.app.post('/api/v1/auth/login', json=user_info)
         self.assertEqual(response.status_code, 400)
-        assert json.loads(response.data)['errors']['message']== "password is required"
+        assert json.loads(
+            response.data)['errors']['message'] == "password is required"

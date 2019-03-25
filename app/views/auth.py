@@ -2,6 +2,7 @@ from app import app
 from flask import Flask, jsonify, request
 from app.models.auth import User
 from app.views.validator import Validation
+from flasgger import swag_from
 
 
 user = User()
@@ -17,7 +18,7 @@ def index():
 
 
 @app.route('/api/v1/auth/signup', methods=['POST'])
-# @swag_from('docs/signup.yml')
+@swag_from('../docs/signup.yml')
 def create_user_account():
     """add new user to self.users"""
     data = request.get_json()
@@ -45,8 +46,8 @@ def create_user_account():
 
 
 @app.route('/api/v1/auth/login', methods=['POST'])
-# @swag_from('docs/signin.yml')
-def user_login():
+@swag_from('../docs/signin.yml')
+def signin_user():
     """Login User."""
     validate_credentials = validator.input_data_validation([
         'email', 'password'

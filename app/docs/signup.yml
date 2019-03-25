@@ -16,10 +16,10 @@ parameters:
         - password
       type: object
       properties:
-        first_name:
+        firstname:
           type: string
           example: kyakus
-        last_name:
+        lastname:
           type: string
           example: ahmad
         email:

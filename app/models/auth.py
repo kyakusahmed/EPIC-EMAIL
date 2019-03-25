@@ -20,7 +20,7 @@ class User:
         }
         self.users.append(user)
         return user
-    
+
     def search_user_by_email(self, email, password):
         """Search for specific user."""
         search = [

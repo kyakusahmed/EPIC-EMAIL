@@ -11,7 +11,8 @@ class Messages:
         self.users = users
         self.messages = messages
 
-    def send_message(self, subject, message, status, sender_id, receiver_id, read):
+    def send_message(
+            self, subject, message, status, sender_id, receiver_id, read):
         """add new message."""
         message = {
             "message_id":  len(self.messages)+1,
@@ -28,10 +29,11 @@ class Messages:
 
     def get_user_message(self, status, read):
         """get user message."""
-        messages = [item for item in self.messages
-        if item['status'] == 'read' if item['read'] == False]
+        messages = [
+            item for item in self.messages if item['status'] == 'read'
+            if not item['read']]
         return messages
-    
+
     def search_user_by_id(self, id):
         """Search for specific user."""
         search_user = [
@@ -40,7 +42,8 @@ class Messages:
 
     def delete_message(self, message_id):
         """delete message."""
-        messages = [item for item in self.messages if item['message_id'] == message_id]
+        messages = [
+            item for item in self.messages if item['message_id'] == message_id]
         if messages:
             self.messages.remove(messages[0])
             return messages
@@ -53,10 +56,12 @@ class Messages:
 
     def get_user_unread_message(self, status, read):
         """get user message."""
-        messages = [item for item in self.messages
-        if item['status'] == 'read' if item['read'] == False]
+        messages = [
+            item for item in self.messages if item['status'] == 'read'
+            if not item['read']]
         return messages
 
     def get_specific_message(self, message_id):
-        messages = [item for item in self.messages if item['message_id'] == message_id]
+        messages = [
+            item for item in self.messages if item['message_id'] == message_id]
         return messages
