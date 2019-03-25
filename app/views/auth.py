@@ -3,7 +3,6 @@ from flask import Flask, jsonify, request
 from app.models.auth import User
 from app.views.validator import Validation
 from flasgger import swag_from
-from validate_email import validate_email
 
 
 user = User()
@@ -28,8 +27,6 @@ def create_user_account():
         ])
     if val_input_data:
         return jsonify({"status": 400, "error": val_input_data}), 400
-    if not validate_email(data['email']):
-        return jsonify({"status": 400, "error": "Invalid email address"}), 400
     registered = user.search_user_by_email(data['email'], data['password'])
     if registered:
         return jsonify({
@@ -61,8 +58,6 @@ def signin_user():
             "errors": validate_credentials
         }), 400
     data = request.get_json()
-    if not validate_email(data['email']):
-        return jsonify({"status": 400, "error": "Invalid email address"}), 400
     check_user = user.search_user_by_email(
         data['email'].strip(), data['password'])
     if not check_user:

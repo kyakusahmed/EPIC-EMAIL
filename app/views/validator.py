@@ -20,6 +20,9 @@ class Validation:
             elif x.strip() == 'password' and len(input[x].strip()) < 5:
                 message = 'password should be atleast five characters'
                 return message
+            elif x.strip() == 'email' and not bool(match(r"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", input[x])):
+                message = "invalid email"
+                return message
             elif x.strip() == 'status' and input[x].strip() not in [
                     'sent', 'draft', 'read']:
                 message = "Status must be sent, draft or read"
