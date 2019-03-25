@@ -53,8 +53,8 @@ $ python run.py
 
 | tasks               |    URLS                |  METHOD  |         PARAMS                                | 
 | ------------------- | -----------------------|----------|-----------------------------------------------|
-|Create new account|api/v1/users/signup|POST| firstname,lastname,email,password|
-|User signin|api/v1/users/login|GET| email,password|
+|Create new account|api/v1/auth/signup|POST| firstname,lastname,email,password|
+|User signin|api/v1/auth/login|GET| email,password|
 |Get all user's recieved emails|api/v1/messages/received|GET| None|
 |Get all unread emails for a user|/api/v1/messages/unread|GET| None|
 |Get all emails sent by a user|/api/v1/messages/sent|GET| None|
