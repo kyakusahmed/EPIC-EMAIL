@@ -13,7 +13,7 @@ class Messages:
 
     def send_message(
             self, subject, message, status, sender_id, receiver_id, read):
-        """add new message."""
+        """send new message."""
         message = {
             "message_id":  len(self.messages)+1,
             "createdOn": str(datetime.now()),
