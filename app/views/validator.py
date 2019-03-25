@@ -16,7 +16,7 @@ class Validation:
             input = request.get_json()
             message = x.strip() + ' is required'
             if not input[x]:
-                return {'field': x, 'message': message}pip 
+                return {'field': x, 'message': message}
             elif x.strip() == 'password' and len(input[x].strip()) < 5:
                 message = 'password should be atleast five characters'
                 return message

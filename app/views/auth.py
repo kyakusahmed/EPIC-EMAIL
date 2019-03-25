@@ -61,6 +61,8 @@ def signin_user():
             "errors": validate_credentials
         }), 400
     data = request.get_json()
+    if not validate_email(data['email']):
+        return jsonify({"status": 400, "error": "Invalid email address"}), 400
     check_user = user.search_user_by_email(
         data['email'].strip(), data['password'])
     if not check_user:
