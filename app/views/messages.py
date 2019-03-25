@@ -23,7 +23,12 @@ def send_message_to_user():
             "errors": validate_credentials
         }), 400
     data = request.get_json()
-    if type(data['sender_id']) or type(data['receiver_id']) is not int:
+    if type(data['receiver_id']) is not int:
+        return jsonify({
+            "data_type_error": "please enter an integer",
+            "status": 400
+            }), 400
+    if type(data['sender_id']) is not int:
         return jsonify({
             "data_type_error": "please enter an integer",
             "status": 400
