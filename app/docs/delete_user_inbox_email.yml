@@ -1,0 +1,22 @@
+Delete user inbox email.
+---
+tags:
+  - emails
+
+parameters:
+  - in: path
+    name: id
+    required: true
+    type: integer
+    description: This route is used to delete user inbox emails. 
+
+
+responses:
+  200:
+    description: 
+    
+  404:
+    description: Order Not found
+
+  401:
+    description: Unauthorization error
