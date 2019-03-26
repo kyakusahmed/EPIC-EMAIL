@@ -1,5 +1,5 @@
 from app import app
-from flask import Flask, jsonify, request
+from flask import jsonify, request
 from app.models.auth import User
 from app.views.validator import Validation
 from flasgger import swag_from

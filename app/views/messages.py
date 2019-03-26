@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import jsonify, request
 from app import app
 from app.views.auth import User
 from app.models.messages import Messages
