@@ -29,3 +29,4 @@ class Validation:
                     'sent', 'draft', 'read']:
                 message = "Status must be sent, draft or read"
                 return message
+        

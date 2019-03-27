@@ -1,4 +1,4 @@
-from db_conn import DatabaseConnection
+from app.models.db_conn import DatabaseConnection
 import psycopg2
 
 
@@ -48,30 +48,33 @@ class Migration(DatabaseConnection):
             MESSAGE VARCHAR(1000) NOT NULL,
             PARENTMESSAGEID INTEGER NOT NULL,
             STATUS VARCHAR(25) NOT NULL,
+            RECEIVER_ID INTEGER,
             READ BOOLEAN,
             createdOn timestamp(6) without time zone
             )
         """,
         """ 
             CREATE TABLE IF NOT EXISTS GROUPS (
-            ID  SERIAL PRIMARY KEY UNIQUE,
-            ADMIN_ID INTEGER,
-            FOREIGN KEY(ADMIN_ID) REFERENCES USERS(ID),
+            ID SERIAL PRIMARY KEY UNIQUE,
+            USER_ID INTEGER,
+            FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
             GROUP_NAME VARCHAR(50) NOT NULL,
+            USER_ROLE VARCHAR(10) NOT NULL,
             createdOn timestamp(6) without time zone
             )
         """, 
         """ 
             CREATE TABLE IF NOT EXISTS MEMBERS (
-            GROUP_ID  SERIAL PRIMARY KEY UNIQUE,
+            ID SERIAL PRIMARY KEY UNIQUE,
+            USER_ID INTEGER,
+            FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
+            GROUP_ID INTEGER,
             FOREIGN KEY(GROUP_ID) REFERENCES GROUPS(ID),
-            MEMBER_ID INTEGER,
-            FOREIGN KEY(MEMBER_ID) REFERENCES USERS(ID),
-            ROLE VARCHAR(10) NOT NULL,
+            USER_ROLE VARCHAR(10) NOT NULL,
             createdOn timestamp(6) without time zone
         )
         """,
-        """ INSERT INTO USERS(FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE)VALUES('AHMAD','KYAKUS','KYAKUSAHMED@GMAIL.COM','813r312','ADMIN')
+        """ INSERT INTO USERS(FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE)VALUES('AHMAD','KYAKUS','KYAKUSAHMED@GMAIL.COM','1988ch','ADMIN')
         """    
         )
         for command in commands:
@@ -79,9 +82,4 @@ class Migration(DatabaseConnection):
                 self.cursor.execute(command)
             except psycopg2.IntegrityError as identifier:
                 pass
-
-
-mig = Migration()
-mig.drop_tables()
-mig.create_tables()
 

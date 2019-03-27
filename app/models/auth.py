@@ -1,34 +1,44 @@
+from app.models.db_conn import DatabaseConnection
+from datetime import datetime
+import psycopg2
 
-users = []
-
-
-class User:
-    """class to manipulate emails and users."""
+class User(DatabaseConnection):
 
     def __init__(self):
-        self.users = users
+        super().__init__()
 
-    def add_new_user(self, email, firstname, lastname, password):
-        """add new user."""
-        user = {
-            "id":  len(self.users)+1,
-            "email": email,
-            "firstname": firstname,
-            "lastname": lastname,
-            "password": password
-        }
-        self.users.append(user)
+    def create_user_account(self, firstname, lastname, email, password):
+        command = """
+        INSERT INTO USERS (
+            firstname, lastname, email, password, role, createdon) VALUES(
+                '{}','{}','{}','{}','{}','{}')
+        """.format(firstname, lastname, email, password, "user", datetime.now())
+        self.cursor.execute(command)
+        return "user registered successfully"
+
+    def user_signin(self, email, password):
+        try:
+            command = """
+            SELECT * FROM USERS WHERE EMAIL= '{}' AND PASSWORD = '{}'
+            """.format(email, password)
+            self.cursor.execute(command)
+            user1 = self.cursor.fetchone()
+            return user1
+        except Exception as ex:
+            return "failed {}".format(ex)
+
+    def get_user_by_email(self, email):
+        command = """
+        SELECT * FROM USERS WHERE EMAIL='{}'
+        """.format(email)
+        self.cursor.execute(command)
+        user = self.cursor.fetchone()
         return user
 
-    def search_user_by_email(self, email, password):
-        """Search for specific user."""
-        search = [
-            item for item in self.users
-            if item['email'] == email if item['password'] == password]
-        return search
-
     def search_user_by_id(self, id):
-        """Search for specific user."""
-        search = [
-            item for item in self.users if item['id'] == id]
-        return search
+        command = """
+        SELECT * FROM USERS WHERE ID ='{}'
+        """.format(id)
+        self.cursor.execute(command)
+        user = self.cursor.fetchone()
+        return user
