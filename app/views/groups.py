@@ -13,10 +13,12 @@ user = User()
 validator = Validation()
 
 
+
 @app.route('/api/v1/groups', methods=['POST'])
 @jwt_required
 @swag_from('../docs/send_emails_to_individuals.yml')
 def create_group():
+
     """send email to an individual."""
     current_user = get_jwt_identity()
     if current_user[6] != "user":
