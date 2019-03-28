@@ -11,3 +11,21 @@ group = Group()
 messages = Messages()
 user = User()
 validator = Validation()
+
+
+@app.route('/api/v1/groups/<int:group_id>/messages', methods=['POST'])
+@jwt_required
+@swag_from('../docs/send_emails_to_individuals.yml')
+def send_message_to_group():
+    """send messages to a group."""
+    current_user = get_jwt_identity()
+    if current_user[6] != "user":
+        return jsonify({"message": "unauthorized access"})
+    validate_credentials = validator.input_data_validation([
+        'subject', 'message', 'status', 'receiver_id'])
+    if validate_credentials:
+        return jsonify({
+            "message": 'Validation error',
+            "errors": validate_credentials
+        }), 400
+   
