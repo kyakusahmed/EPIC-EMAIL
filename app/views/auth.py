@@ -45,3 +45,27 @@ def create_user_account():
         "user": user_info
         }]
     return jsonify({"data": new_user, "status": 201}), 201
+  
+  
+@app.route('/api/v1/auth/login', methods=['POST'])
+@swag_from('../docs/signin.yml')
+def signin_user():
+    """Login User."""
+    validate_credentials = validator.input_data_validation([
+        'email', 'password'
+        ])
+    if validate_credentials:
+        return jsonify({
+            "message": 'Validation error',
+            "errors": validate_credentials
+        }), 400
+    data = request.get_json()
+    check_user = user.user_signin(data['email'].strip(), data['password'])
+    if not check_user:
+        return jsonify({
+            "status": 200, "message": "wrong password or email"
+            }), 200
+    access_token = create_access_token(identity=check_user)
+    return jsonify({
+        'message': "Login successful", 'access_token': access_token}), 200
+
