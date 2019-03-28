@@ -12,46 +12,25 @@ user = User()
 validator = Validation()
 
 
-@app.route('/api/v1/messages', methods=['POST'])
+@app.route('/api/v1/messages/<int:message_id>', methods=['GET'])
 @jwt_required
-@swag_from('../docs/send_emails_to_individuals.yml')
-def send_message_to_individual():
-    """send email to an individual."""
+@swag_from('../docs/get_specific_user_email.yml')
+def get_specific_user_message(message_id):
+    """get specific user's email"""
     current_user = get_jwt_identity()
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
-    validate_credentials = validator.input_data_validation([
-        'subject', 'message', 'status', 'receiver_id'])
-    if validate_credentials:
-        return jsonify({
-            "message": 'Validation error',
-            "errors": validate_credentials
-        }), 400
-    data = request.get_json()
-    if type(data['receiver_id']) is not int:
-        return jsonify({
-            "data_type_error": "please enter an integer",
-            "status": 400
-            }), 400
-    if current_user[0] == data['receiver_id']:
-        return jsonify({
-            "status": 400, "message": "you can not send an email to yourself"
-            }), 400
-    user_search = user.search_user_by_id(data['receiver_id'])
-    if not user_search:
-        return jsonify({
-            "status": 404, "message": "Recipient does not exist"
-            }), 404
-    send_message = messages.add_message(
-        data['subject'],
-        data["message"],
-        data['parentMessageID'],
-        data["status"],
-        current_user[0],
-        data['receiver_id'],
-        False
-        )
-    return jsonify({
-        "data": [{
-            "Receiver_id": data[
-                "receiver_id"], "message": send_message}], "status": 201}), 201
+    search_message = messages.search_message(message_id)
+    if not search_message:
+        return jsonify({"status": 404, "messaege": "message not found"}), 404
+    return jsonify({"status": 200, "message": {
+        'message_id': search_message[0],
+        'user_id': search_message[1],
+        'subject': search_message[2],
+        'message': search_message[3],
+        'parentMessageID': search_message[4],
+        'status': search_message[5],
+        'receiver_id': search_message[6],
+        'read': search_message[7],
+        'createdon': search_message[8]
+    }})
