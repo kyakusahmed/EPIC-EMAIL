@@ -14,7 +14,6 @@ validator = Validation()
 
 @app.route('/api/v1/messages/delete/<int:message_id>', methods=['DELETE'])
 @jwt_required
-@swag_from('../docs/delete_user_inbox_email.yml')
 def delete_user_message(message_id):
     """delete user's message"""
     current_user = get_jwt_identity()
