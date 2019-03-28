@@ -42,6 +42,7 @@ def create_user_account():
         data['password']
     )
     new_user = [{
+        "use"
         "user": user_info
         }]
     return jsonify({"data": new_user, "status": 201}), 201
@@ -65,7 +66,6 @@ def signin_user():
         return jsonify({
             "status": 200, "message": "wrong password or email"
             }), 200
-    access_token = create_access_token(identity=check_user)
-    return jsonify({
-        'message': "Login successful", 'access_token': access_token}), 200
+    access_token = [{'access_token':create_access_token(identity=check_user)}]
+    return jsonify({'status': 200, 'data': access_token}), 200
 

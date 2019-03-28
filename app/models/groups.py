@@ -40,13 +40,16 @@ class Group(DatabaseConnection):
 
     def delete_user_from_group(self, group_id, user_id):
         """delete user from group"""
-        command = "
-        DELETE FROM MEMBERS WHERE group_id = '%s' and user_id = '%s'" % (
+        command = "DELETE FROM MEMBERS WHERE group_id = '%s' and user_id = '%s'" % (
             group_id, user_id)
         self.cursor.execute(command)
         return "user deleted"
 
-    # def send_message_to_group(
-    #     self, subject, message, parentMessageID,
-    #         status, sender_id, receiver_id, read):
-    #     """send message to a group"""
+    def get_that_group(self, group_name):
+        """return group information"""
+        command =  "SELECT row_to_json(groups) FROM groups WHERE group_name='%s'" % (group_name)
+        self.cursor.execute(command, (group_name))
+        result = self.cursor.fetchone()
+        if not result:
+            return "message not saved"
+        return result
