@@ -9,77 +9,69 @@ class Migration(DatabaseConnection):
 
     def drop_tables(self):
         commands = (
-        """ 
-        DROP TABLE USERS CASCADE
-        """,
-        """
-        DROP TABLE MESSAGES CASCADE
-        """,
-        """ 
-        DROP TABLE GROUPS CASCADE
-        """,
-        """ 
-        DROP TABLE MEMBERS CASCADE
-        """
+            """ DROP TABLE USERS CASCADE """,
+            """ DROP TABLE MESSAGES CASCADE """,
+            """ DROP TABLE GROUPS CASCADE """,
+            """ DROP TABLE MEMBERS CASCADE """
         )
         for command in commands:
             self.cursor.execute(command)
-    
 
     def create_tables(self):
         """ create tables in the PostgreSQL database"""
         commands = (
-        """ CREATE TABLE IF NOT EXISTS USERS (
-            ID SERIAL PRIMARY KEY UNIQUE,
-            FIRSTNAME VARCHAR(50) NOT NULL,
-            LASTNAME VARCHAR(50) NOT NULL,
-            EMAIL VARCHAR(50) not null UNIQUE,
-            PASSWORD VARCHAR(50) NOT NULL,
-            PHONE_NUMBER VARCHAR(50),
-            ROLE VARCHAR(50) NOT NULL,
-            createdOn timestamp(6) without time zone
+            """ CREATE TABLE IF NOT EXISTS USERS (
+                ID SERIAL PRIMARY KEY UNIQUE,
+                FIRSTNAME VARCHAR(50) NOT NULL,
+                LASTNAME VARCHAR(50) NOT NULL,
+                EMAIL VARCHAR(50) not null UNIQUE,
+                PASSWORD VARCHAR(50) NOT NULL,
+                PHONE_NUMBER VARCHAR(50),
+                ROLE VARCHAR(50) NOT NULL,
+                createdOn timestamp(6) without time zone
+                )
+            """,
+            """ CREATE TABLE IF NOT EXISTS MESSAGES (
+                MESSAGE_ID  SERIAL PRIMARY KEY UNIQUE,
+                USER_ID INTEGER,
+                FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
+                SUBJECT VARCHAR(50) NOT NULL,
+                MESSAGE VARCHAR(1000) NOT NULL,
+                PARENTMESSAGEID INTEGER NOT NULL,
+                STATUS VARCHAR(25) NOT NULL,
+                RECEIVER_ID INTEGER,
+                READ BOOLEAN,
+                createdOn timestamp(6) without time zone
+                )
+            """,
+            """
+                CREATE TABLE IF NOT EXISTS GROUPS (
+                ID SERIAL PRIMARY KEY UNIQUE,
+                USER_ID INTEGER,
+                FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
+                GROUP_NAME VARCHAR(50) NOT NULL,
+                USER_ROLE VARCHAR(10) NOT NULL,
+                createdOn timestamp(6) without time zone
+                )
+            """,
+            """
+                CREATE TABLE IF NOT EXISTS MEMBERS (
+                ID SERIAL PRIMARY KEY UNIQUE,
+                USER_ID INTEGER,
+                FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
+                GROUP_ID INTEGER,
+                FOREIGN KEY(GROUP_ID) REFERENCES GROUPS(ID),
+                USER_ROLE VARCHAR(10) NOT NULL,
+                createdOn timestamp(6) without time zone
             )
-        """,
-        """ CREATE TABLE IF NOT EXISTS MESSAGES (
-            MESSAGE_ID  SERIAL PRIMARY KEY UNIQUE,
-            USER_ID INTEGER,
-            FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
-            SUBJECT VARCHAR(50) NOT NULL,
-            MESSAGE VARCHAR(1000) NOT NULL,
-            PARENTMESSAGEID INTEGER NOT NULL,
-            STATUS VARCHAR(25) NOT NULL,
-            RECEIVER_ID INTEGER,
-            READ BOOLEAN,
-            createdOn timestamp(6) without time zone
+            """,
+            """ INSERT INTO USERS(
+                FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE)VALUES(
+                    'AHMAD','KYAKUS','KYAKUSAHMED@GMAIL.COM','1988ch','ADMIN')
+            """
             )
-        """,
-        """ 
-            CREATE TABLE IF NOT EXISTS GROUPS (
-            ID SERIAL PRIMARY KEY UNIQUE,
-            USER_ID INTEGER,
-            FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
-            GROUP_NAME VARCHAR(50) NOT NULL,
-            USER_ROLE VARCHAR(10) NOT NULL,
-            createdOn timestamp(6) without time zone
-            )
-        """, 
-        """ 
-            CREATE TABLE IF NOT EXISTS MEMBERS (
-            ID SERIAL PRIMARY KEY UNIQUE,
-            USER_ID INTEGER,
-            FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
-            GROUP_ID INTEGER,
-            FOREIGN KEY(GROUP_ID) REFERENCES GROUPS(ID),
-            USER_ROLE VARCHAR(10) NOT NULL,
-            createdOn timestamp(6) without time zone
-        )
-        """,
-        """ INSERT INTO USERS(FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE)VALUES('AHMAD','KYAKUS','KYAKUSAHMED@GMAIL.COM','1988ch','ADMIN')
-        """    
-        )
         for command in commands:
             try:
                 self.cursor.execute(command)
             except psycopg2.IntegrityError as identifier:
                 pass
-

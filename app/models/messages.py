@@ -2,17 +2,22 @@ from app.models.db_conn import DatabaseConnection
 from datetime import datetime
 import psycopg2
 
+
 class Messages(DatabaseConnection):
 
     def __init__(self):
         super().__init__()
 
-    def add_message(self, subject, message, parentMessageID, status, sender_id, receiver_id, read):
+    def add_message(
+            self, subject, message, parentMessageID,
+            status, sender_id, receiver_id, read):
         command = """INSERT INTO MESSAGES (
-            subject, message, parentMessageID, status, user_id, receiver_id, read, createdon) 
+            subject, message, parentMessageID,
+            status, user_id, receiver_id, read, createdon)
         VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
         """.format(
-            subject, message, parentMessageID, status, sender_id, receiver_id, read, datetime.now())
+            subject, message, parentMessageID, status, sender_id,
+            receiver_id, read, datetime.now())
         self.cursor.execute(command)
         return "message sent"
 
@@ -33,7 +38,8 @@ class Messages(DatabaseConnection):
         return data
 
     def delete_message(self, message_id):
-        command = "DELETE FROM MESSAGES CASCADE WHERE message_id = '%s'" % (message_id)
+        command = "DELETE FROM MESSAGES CASCADE WHERE message_id = '%s'" % (
+            message_id)
         self.cursor.execute(command)
         return "message deleted"
 

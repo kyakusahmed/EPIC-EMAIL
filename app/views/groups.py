@@ -13,6 +13,7 @@ user = User()
 validator = Validation()
 
 
+
 @app.route('/api/v1/groups/<int:id>/users', methods=['POST'])
 @jwt_required
 @swag_from('../docs/send_emails_to_individuals.yml')
@@ -52,3 +53,4 @@ def add_user_to_group(id):
         data["user_role"]
         )
     return jsonify({"data": [{"message": send_message}], "status": 201}), 201
+
