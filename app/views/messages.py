@@ -14,7 +14,6 @@ validator = Validation()
 
 @app.route('/api/v1/messages/sent', methods=['GET'])
 @jwt_required
-@swag_from('../docs/get_user_sent_emails.yml')
 def get_user_sent_messages():
     """fetch sent messages."""
     current_user = get_jwt_identity()
