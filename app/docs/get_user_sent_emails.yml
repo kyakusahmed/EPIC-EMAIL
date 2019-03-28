@@ -1,0 +1,21 @@
+Get user sent emails.
+---
+tags:
+  - emails
+
+parameters:
+  - in: body
+    name: body
+    type: object
+    description: This route is used to get user sent emails. 
+
+
+responses:
+  200:
+    description: 
+    
+  404:
+    description: Order Not found
+
+  401:
+    description: Unauthorization error

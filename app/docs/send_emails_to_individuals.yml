@@ -1,0 +1,40 @@
+Send emails to individuals
+---
+tags:
+  - emails
+parameters:
+  - in: body
+    name: body
+    type: object
+    description: This endpoint is helps a user to send an email to an individual. The user provides subject, message, status, sender_id, receiver_id for them to send an email
+
+    schema:
+      required:
+        - subject
+        - message
+        - status
+        - sender_id
+      type: object
+      properties:
+        subject:
+          type: string
+          example: me and you
+        message:
+          type: string
+          example: the day we last met was yesterday! rite
+        status:
+          type: string
+          example: sent
+        sender_id:
+          type: integer
+          example: 3
+        receiver_id:
+          type: integer
+          example: 1  
+responses:
+  201:
+    description: Users provide the subject, message, status, sender_id, receiver_id for them to send an email
+  400:
+    description: Empty fields or invalid email or short password.
+  404:
+    description: User doesnt exist.  
