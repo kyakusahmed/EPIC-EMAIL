@@ -2,6 +2,7 @@ from app.models.db_conn import DatabaseConnection
 from datetime import datetime
 import psycopg2
 
+
 class Group(DatabaseConnection):
 
     def __init__(self):
@@ -28,7 +29,7 @@ class Group(DatabaseConnection):
         command = "DELETE FROM GROUPS CASCADE WHERE id = '%s'" % (id)
         self.cursor.execute(command)
         return "message deleted"
-    
+
     def add_user_to_group(self, user_id, group_id, user_role):
         command = """INSERT INTO members (
             user_id, group_id, user_role, createdOn) VALUES(
@@ -39,16 +40,13 @@ class Group(DatabaseConnection):
 
     def delete_user_from_group(self, group_id, user_id):
         """delete user from group"""
-        command = "DELETE FROM MEMBERS WHERE group_id = '%s' and user_id = '%s'" % (group_id, user_id)
+        command = "
+        DELETE FROM MEMBERS WHERE group_id = '%s' and user_id = '%s'" % (
+            group_id, user_id)
         self.cursor.execute(command)
         return "user deleted"
 
-    # def send_message_to_group(self, subject, message, parentMessageID, status, sender_id, receiver_id, read):
+    # def send_message_to_group(
+    #     self, subject, message, parentMessageID,
+    #         status, sender_id, receiver_id, read):
     #     """send message to a group"""
-
-
-
-
-
-
-

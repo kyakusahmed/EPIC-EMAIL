@@ -2,6 +2,7 @@ from app.models.db_conn import DatabaseConnection
 from datetime import datetime
 import psycopg2
 
+
 class User(DatabaseConnection):
 
     def __init__(self):
@@ -12,7 +13,8 @@ class User(DatabaseConnection):
         INSERT INTO USERS (
             firstname, lastname, email, password, role, createdon) VALUES(
                 '{}','{}','{}','{}','{}','{}')
-        """.format(firstname, lastname, email, password, "user", datetime.now())
+        """.format(
+            firstname, lastname, email, password, "user", datetime.now())
         self.cursor.execute(command)
         return "user registered successfully"
 
