@@ -27,4 +27,3 @@ def delete_group(id):
     deleted_message = [{"message": group.delete_group(id)}]
     return jsonify({
         "data": deleted_message, "status": 200
-        }), 200
