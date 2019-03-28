@@ -12,17 +12,46 @@ user = User()
 validator = Validation()
 
 
-@app.route('/api/v1/messages/delete/<int:message_id>', methods=['DELETE'])
+@app.route('/api/v1/messages', methods=['POST'])
 @jwt_required
-@swag_from('../docs/delete_user_inbox_email.yml')
-def delete_user_message(message_id):
-    """delete user's message"""
+@swag_from('../docs/send_emails_to_individuals.yml')
+def send_message_to_individual():
+    """send email to an individual."""
     current_user = get_jwt_identity()
     if current_user[6] != "user":
-        return jsonify({"status": 401, "message": "unauthorized access"})
-    search_message = messages.search_message(message_id)
-    if not search_message:
-        return jsonify({"status": 404, "messaege": "message not found"}), 404
+        return jsonify({"message": "unauthorized access"})
+    validate_credentials = validator.input_data_validation([
+        'subject', 'message', 'status', 'receiver_id'])
+    if validate_credentials:
+        return jsonify({
+            "message": 'Validation error',
+            "errors": validate_credentials
+        }), 400
+    data = request.get_json()
+    if type(data['receiver_id']) is not int:
+        return jsonify({
+            "data_type_error": "please enter an integer",
+            "status": 400
+            }), 400
+    if current_user[0] == data['receiver_id']:
+        return jsonify({
+            "status": 400, "message": "you can not send an email to yourself"
+            }), 400
+    user_search = user.search_user_by_id(data['receiver_id'])
+    if not user_search:
+        return jsonify({
+            "status": 404, "message": "Recipient does not exist"
+            }), 404
+    send_message = messages.add_message(
+        data['subject'],
+        data["message"],
+        data['parentMessageID'],
+        data["status"],
+        current_user[0],
+        data['receiver_id'],
+        False
+        )
     return jsonify({
-        "message": messages.delete_message(message_id), "status": 200
-        }), 200
+        "data": [{
+            "Receiver_id": data[
+                "receiver_id"], "message": send_message}], "status": 201}), 201
