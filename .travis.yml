@@ -2,13 +2,19 @@ language: python
 python:
   - "3.6" 
  
-install:
+services:
+  - postgresql
+
+before_script:
+  - psql -c "CREATE DATABASE  ireporter;" -U postgres
+
+install: 
   - pip install -r requirements.txt
 
+
 script:
-  - pytest --cov
+  - pytest --cov 
   - coverage report
 
-
 after_success:
-  - coveralls 
+- coveralls
