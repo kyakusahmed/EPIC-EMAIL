@@ -44,3 +44,5 @@ class User(DatabaseConnection):
         self.cursor.execute(command)
         user = self.cursor.fetchone()
         return user
+
+    

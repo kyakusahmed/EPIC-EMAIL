@@ -1,14 +1,18 @@
-Get user unread emails.
+Delete group.
 ---
 tags:
-  - emails
+  - groups
 
 parameters:
-  - in: body
-    name: body
-    type: object
-    description: This route is used to get user received emails. 
- 
+  - in: path
+    name: group_id
+    required: true
+    type: integer
+    name: user_id
+    required: true
+    type: integer
+    description: This route is used to delete a user from a group. 
+  
   - in: header
     name: Authorization
     description: authorization header
@@ -19,13 +23,13 @@ parameters:
 
 responses:
   200:
-    description: dictionary
+    description: 
     
   404:
-    description: Order Not found
+    description: group Not found
 
   401:
-    description: Unauthorization error
+    description: Unauthorization access
 
 security:
   - JWT:

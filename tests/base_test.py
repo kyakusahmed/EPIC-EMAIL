@@ -12,13 +12,11 @@ class BaseTest(unittest.TestCase):
         self.app = app.test_client()
         
     def return_admin_token(self):
-    #     """admin token."""
-    #     self.app.post('/api/v1/users/register', content_type="application/json", json=admin_register)
         response = self.app.post('/api/v1/auth/login', json=admin_login)
-        return json.loads(response.data)['access_token']
+        return json.loads(response.data)['data'][0]['access_token']
 
     def return_user_token(self):
         """user token."""
         self.app.post('/api/v1/auth/signup', json=user_register)
         response = self.app.post('/api/v1/auth/login', json=user_login)
-        return json.loads(response.data)['access_token']
+        return json.loads(response.data)['data'][0]['access_token']

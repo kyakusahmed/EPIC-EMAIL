@@ -33,10 +33,11 @@ class Group(DatabaseConnection):
     def add_user_to_group(self, user_id, group_id, user_role):
         command = """INSERT INTO members (
             user_id, group_id, user_role, createdOn) VALUES(
-                '{}','{}','{}','{}')
+                '{}','{}','{}','{}') RETURNING *;
         """.format(user_id, group_id, user_role, datetime.now())
         self.cursor.execute(command)
-        return "user added to group"
+        data = self.cursor.fetchone()
+        return data
 
     def delete_user_from_group(self, group_id, user_id):
         """delete user from group"""
@@ -53,3 +54,42 @@ class Group(DatabaseConnection):
         if not result:
             return "message not saved"
         return result
+
+    def send_message_to_group(self, group_id, subject, message, parentMessageID, status, read):
+        """add message to a group"""
+        command = """INSERT INTO GROUP_MESSAGES (
+            group_id, subject, message, parentMessageID, status, read, createdon)
+        VALUES('{}', '{}','{}', '{}', '{}', '{}','{}')
+        """.format(
+            group_id, subject, message, parentMessageID, status, read, datetime.now())
+        self.cursor.execute(command)
+
+    def get_that_message(self, subject):
+        """return group information"""
+        command =  "SELECT row_to_json(group_messages) FROM group_messages WHERE subject='%s'" % (subject)
+        self.cursor.execute(command, (subject))
+        result = self.cursor.fetchone()
+        if not result:
+            return "message not saved"
+        return result
+
+    def get_user(self, user_id):
+        """return group information"""
+        command =  "SELECT row_to_json(members) FROM members WHERE user_id='%s'" % (user_id)
+        self.cursor.execute(command, (user_id))
+        result = self.cursor.fetchone()
+        if not result:
+            return "message not saved"
+        return result
+
+    def get_all_groups(self):
+        command = """
+        SELECT * FROM GROUPS""".format()
+        self.cursor.execute(command)
+        data = self.cursor.fetchall()
+        return data
+
+    
+      
+
+

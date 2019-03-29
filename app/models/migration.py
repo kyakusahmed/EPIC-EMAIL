@@ -12,7 +12,8 @@ class Migration(DatabaseConnection):
             """ DROP TABLE USERS CASCADE """,
             """ DROP TABLE MESSAGES CASCADE """,
             """ DROP TABLE GROUPS CASCADE """,
-            """ DROP TABLE MEMBERS CASCADE """
+            """ DROP TABLE MEMBERS CASCADE """,
+            """ DROP TABLE GROUP_MESSAGES CASCADE """
         )
         for command in commands:
             self.cursor.execute(command)
@@ -32,7 +33,7 @@ class Migration(DatabaseConnection):
                 )
             """,
             """ CREATE TABLE IF NOT EXISTS MESSAGES (
-                MESSAGE_ID  SERIAL PRIMARY KEY UNIQUE,
+                MESSAGE_ID SERIAL PRIMARY KEY UNIQUE,
                 USER_ID INTEGER,
                 FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
                 SUBJECT VARCHAR(50) NOT NULL,
@@ -40,6 +41,7 @@ class Migration(DatabaseConnection):
                 PARENTMESSAGEID INTEGER NOT NULL,
                 STATUS VARCHAR(25) NOT NULL,
                 RECEIVER_ID INTEGER,
+                FOREIGN KEY(RECEIVER_ID) REFERENCES USERS(ID),
                 READ BOOLEAN,
                 createdOn timestamp(6) without time zone
                 )
@@ -65,9 +67,21 @@ class Migration(DatabaseConnection):
                 createdOn timestamp(6) without time zone
             )
             """,
+            """ CREATE TABLE IF NOT EXISTS GROUP_MESSAGES (
+                ID SERIAL PRIMARY KEY UNIQUE,
+                GROUP_ID INTEGER,
+                FOREIGN KEY(GROUP_ID) REFERENCES GROUPS(ID),
+                SUBJECT VARCHAR(50) NOT NULL,
+                MESSAGE VARCHAR(1000) NOT NULL,
+                PARENTMESSAGEID INTEGER NOT NULL,
+                STATUS VARCHAR(25) NOT NULL,
+                READ BOOLEAN,
+                createdOn timestamp(6) without time zone
+                )
+            """,
             """ INSERT INTO USERS(
-                FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE)VALUES(
-                    'AHMAD','KYAKUS','KYAKUSAHMED@GMAIL.COM','1988ch','ADMIN')
+                FIRSTNAME, LASTNAME, EMAIL, PASSWORD, ROLE) VALUES(
+                    'ahmed','kyakus','kyakusahmed@gmail.com','1988ch','admin')
             """
             )
         for command in commands:

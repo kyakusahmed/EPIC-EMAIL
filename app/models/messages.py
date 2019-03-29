@@ -9,33 +9,33 @@ class Messages(DatabaseConnection):
     def __init__(self):
         super().__init__()
 
-    def add_message(
-            self, subject, message, parentMessageID,
-            status, sender_id, receiver_id, read):
-        command = """INSERT INTO MESSAGES (
-            subject, message, parentMessageID,
-            status, user_id, receiver_id, read, createdon)
-        VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
-        """.format(
-            subject, message, parentMessageID, status, sender_id,
-            receiver_id, read, datetime.now())
+    def add_message(self, subject, message, parentMessageID, status, sender_id, receiver_id, read):
+        command = """INSERT INTO MESSAGES (subject, message, parentMessageID, status, user_id, receiver_id, read, createdon)
+        VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') RETURNING*;
+        """.format(subject, message, parentMessageID, status, sender_id, receiver_id, read, datetime.now())
         self.cursor.execute(command)
+        data = self.cursor.fetchone()
+        return data
 
-    def get_user_received_messages(self, status, read):
+    def get_user_received_messages(self, receiver_id, status, read):
         command = """
-        SELECT * FROM MESSAGES WHERE STATUS = 'read' AND READ = False
-        """.format(status, read)
+        SELECT * FROM MESSAGES WHERE receiver_id = {} AND status = 'read' or read = False 
+        """.format(receiver_id, status, read)
         self.cursor.execute(command)
         data = self.cursor.fetchall()
         return data
 
-    def get_sent_messages(self, status):
-        command = """
-        SELECT * FROM MESSAGES WHERE STATUS = 'sent'
-        """.format(status)
-        self.cursor.execute(command)
-        data = self.cursor.fetchall()
-        return data
+    def get_sent_messages(self, status, user_id):
+        try:
+            command = """
+            SELECT * FROM MESSAGES WHERE status = 'sent' and user_id = {}
+            """.format(user_id, status)
+            self.cursor.execute(command)
+            data = self.cursor.fetchall()
+            return data
+        except psycopg2.IntegrityError as identifier:
+            message = ("messages dont exist")
+            return message
 
     def delete_message(self, message_id):
         command = "DELETE FROM MESSAGES CASCADE WHERE message_id = '%s'" % (
@@ -58,10 +58,3 @@ class Messages(DatabaseConnection):
         if not result:
             return "message not saved"
         return result
-        
-        # command = """
-        # SELECT * FROM MESSAGES WHERE receiver_id = {} 
-        # """.format(receiver_id)
-        # self.cursor.execute(command)
-        # data = self.cursor.fetchall()
-        # return data

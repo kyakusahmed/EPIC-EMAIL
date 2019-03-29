@@ -7,7 +7,7 @@ class GroupTest(BaseTest):
 
     def test_create_group(self):
         """test create new group"""
-        token = self.return_user_token()
+        token = self.return_admin_token()
         group_info = {
             "group_name": "finance",
 	        "user_role": "admin"
@@ -35,7 +35,7 @@ class GroupTest(BaseTest):
 
     def test_add_user_to_group(self):
         """test add user to a group"""
-        token = self.return_user_token()
+        token = self.return_admin_token()
         group_info = {
             "group_name": "finance",
 	        "user_role": "admin"
@@ -64,10 +64,6 @@ class GroupTest(BaseTest):
         self.app.post('/api/v1/groups/1/users', headers={"Authorization": "Bearer " + token}, json=user_info)
         response = self.app.delete(
             '/api/v1/groups/1/users/1', headers={
-                "Authorization": "Bearer " + token},)
-        self.assertEqual(response.status_code, 200)    
-
-   
-
-        
+                "Authorization": "Bearer " + token})
+        self.assertEqual(response.status_code, 200)
 
