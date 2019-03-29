@@ -10,6 +10,26 @@
  [HEROKU](https://epemail.herokuapp.com/)
  
  [API DOCUMENTATION](https://epemail.herokuapp.com/apidocs/#/)
+ 
+ [GH-PAGES](https://kyakusahmed.github.io/EPIC-EMAIL/UI/signin.html)
+
+
+Features as an Admin:
+
+-   Create a group
+-   Add different users to the group.
+
+Features User side:
+
+-   Signup page using personal credentials.
+-   Login page using Email and Password.
+-   Get all received emails for a user.
+-   Get all unread emails for a user.
+-   Get all emails sent by a user.
+-   Get a specific user’s email.
+-   Send email to individuals.
+-   Delete an email in a user’s inbox.
+
 
 ### How to run the app
 
@@ -61,26 +81,13 @@ $ python run.py
 |Get a specific user’s email|/api/v1/emails/messages/<integer:id>|GET| id|
 |Send email to individuals|/api/v1/messages|POST| subject, message, status, sender_id, receiver_id, read |
 |Delete an email in a user’s inbox|/api/v1/message/delete/<integer:id>|DELETE| id|
+|user create group|api/v1/groups|POST|None|
+|user delete group|api/v1/groups/<int:group_id>|DELETE|group_id|
+|add user to group|api/v1/groups/<int:id>/users|POST|id|
+|delete user from group|api/groups/<int:group_id>/users/<int:user_id>|DELETE| group_id, user_id|
+|send message to a group|api/v1/groups/<int:group_id>/messages|group_id|
 
 
-[GH-PAGES](https://kyakusahmed.github.io/EPIC-EMAIL/UI/signin.html)
-
-
-Features as an Admin:
-
--   Create a group
--   Add different users to the group.
-
-Features User side:
-
--   Signup page using personal credentials.
--   Login page using Email and Password.
--   Get all received emails for a user.
--   Get all unread emails for a user.
--   Get all emails sent by a user.
--   Get a specific user’s email.
--   Send email to individuals.
--   Delete an email in a user’s inbox.
 
 
 
