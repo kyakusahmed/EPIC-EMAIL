@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/kyakusahmed/EPIC-EMAIL.svg?branch=challenge-2%2Fapi)](https://travis-ci.org/kyakusahmed/EPIC-EMAIL)
-[![Coverage Status](https://coveralls.io/repos/github/kyakusahmed/EPIC-EMAIL/badge.svg?branch=challenge-2%2Fapi)](https://coveralls.io/github/kyakusahmed/EPIC-EMAIL?branch=challenge-2%2Fapi)
+[![Build Status](https://travis-ci.org/kyakusahmed/EPIC-EMAIL.svg?branch=challenge-3)](https://travis-ci.org/kyakusahmed/EPIC-EMAIL)
+[![Coverage Status](https://coveralls.io/repos/github/kyakusahmed/EPIC-EMAIL/badge.svg?branch=challenge-3)](https://coveralls.io/github/kyakusahmed/EPIC-EMAIL?branch=challenge-3)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1b5054bcf77673c0fb3f/maintainability)](https://codeclimate.com/github/kyakusahmed/EPIC-EMAIL/maintainability)
 
 
