@@ -7,11 +7,11 @@ from app.views.validator import Validation
 from flasgger import swag_from
 from flask_jwt_extended import (jwt_required, get_jwt_identity)
 
+
 group = Group()
 messages = Messages()
 user = User()
 validator = Validation()
-
 
 
 @app.route('/api/v1/groups', methods=['POST'])
@@ -23,7 +23,7 @@ def create_group():
     if current_user[6] != "admin":
         return jsonify({"message": "unauthorized access"})
     validate_info = validator.input_data_validation([
-        'group_name', 'user_role'
+        'group_name'
         ])
     if validate_info:
         return jsonify({
@@ -31,18 +31,17 @@ def create_group():
             "errors": validate_info
         }), 400
     data = request.get_json()
-
-    role = data['user_role']
-    user_roles = ['admin', 'user']
-    if role not in user_roles:
-        return jsonify({"error": " role {} doesnot exist".format(user_role)}), 200
     send_group = group.add_group(
         current_user[0],
-        data['group_name'],
-        data['user_role'],
+        data['group_name']
         )
-    check_group = group.get_that_group(data['group_name'])
-    return jsonify({"group": check_group, "status": 201}), 201
+    return jsonify({"status": 201, "group": {
+        'id': send_group[0],
+        'user_id': send_group[1],
+        'group_name': send_group[2],
+        'user_role': send_group[3],
+        'createdOn': send_group[4]
+        }}), 201
 
 
 @app.route('/api/v1/groups/<int:id>', methods=['DELETE'])
@@ -90,7 +89,7 @@ def add_user_to_group(id):
     current_user = get_jwt_identity()
     if current_user[6] != "admin":
         return jsonify({"message": "unauthorized access"})
-    validate_credentials = validator.input_data_validation(['user_id', 'user_role'])
+    validate_credentials = validator.input_data_validation(['user_id'])
     if validate_credentials:
         return jsonify({
             "message": 'Validation error',
@@ -116,11 +115,15 @@ def add_user_to_group(id):
             }), 404
     send_message = group.add_user_to_group(
         data['user_id'],
-        id,
-        data["user_role"]
+        id
         )
-    get_user = group.get_user(data['user_id'])
-    return jsonify({"data": get_user, "status": 201}), 201
+    return jsonify({"status": 201, "data": {
+        'id': send_message[0],
+        'user_id': send_message[1],
+        'group_id': send_message[2],
+        'user_role': send_message[3],
+        'createdOn': send_message[4]
+        }}), 201
 
 
 @app.route('/api/v1/groups/<int:group_id>/messages', methods=['POST'])
@@ -132,7 +135,7 @@ def send_message_to_group(group_id):
     if current_user[6] != "admin":
         return jsonify({"message": "unauthorized access"})
     validate_credentials = validator.input_data_validation([
-        'subject', 'message', 'parentMessageID', 'status'])
+        'subject', 'message', 'status'])
     if validate_credentials:
         return jsonify({
             "message": 'Validation error',
@@ -158,8 +161,16 @@ def send_message_to_group(group_id):
         data["status"],
         False
         )
-    message_info = group.get_that_message(data['subject'])
-    return jsonify({"message": message_info, "status": 201}), 201
+    return jsonify({"status": 201, "message": {
+        'id': add_group[0],
+        'group_id': add_group[1],
+        'subject': add_group[2],
+        'message': add_group[3],
+        'parentMessageID': add_group[4],
+        'status': add_group[5],
+        'read': add_group[6],
+        'createdon': add_group[7]
+    }}), 201
 
 
 @app.route('/api/v1/groups', methods=['GET'])
@@ -181,3 +192,35 @@ def get_all_groups():
             'createdon': all_groups[key][4]
         })
     return jsonify({"status": 200, "groups": groups}), 200
+
+
+
+
+@app.route('/api/v1/groups/<int:group_id>/name', methods=['PATCH'])
+@jwt_required
+@swag_from('../docs/delete_user_from_group.yml')
+def update_group_name(group_id):
+    """delete user's group"""
+    
+    current_user = get_jwt_identity()
+    if current_user[6] != "admin":
+        return jsonify({"status": 401, "message": "unauthorized access"})
+    
+    search_group = group.search_group(group_id)
+    if not search_group:
+        return jsonify({"status": 404, "group": "unable to find group"}), 404
+    
+    get_input = request.get_json()
+    validation = validator.input_data_validation(['group_name'])
+    if validation:
+        return jsonify({"error": validation}), 400
+    output = group.admin_update_group_name(group_id, get_input['group_name'])
+    return jsonify({"status": 200, "message": {
+        'id': output[0],
+        'user_id': output[1],
+        'group_id': output[2],
+        'user_role': output[3],
+        'createdOn': output[4]
+        }}), 200
+    
+

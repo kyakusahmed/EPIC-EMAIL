@@ -38,7 +38,7 @@ class Migration(DatabaseConnection):
                 FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
                 SUBJECT VARCHAR(50) NOT NULL,
                 MESSAGE VARCHAR(1000) NOT NULL,
-                PARENTMESSAGEID INTEGER NOT NULL,
+                PARENTMESSAGEID INTEGER,
                 STATUS VARCHAR(25) NOT NULL,
                 RECEIVER_ID INTEGER,
                 FOREIGN KEY(RECEIVER_ID) REFERENCES USERS(ID),

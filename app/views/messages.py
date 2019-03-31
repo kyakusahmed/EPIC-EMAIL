@@ -52,7 +52,6 @@ def send_message_to_individual():
         'user_id': send_message[1],
         'subject': send_message[2],
         'message': send_message[3],
-        'message': send_message[3],
         'parentMessageID': send_message[4],
         'status': send_message[5],
         'receiver_id': send_message[6],
@@ -174,5 +173,3 @@ def delete_user_message(message_id):
     return jsonify({
         "data": message_to_delete , "status": 200
         }), 200
-
-

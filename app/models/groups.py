@@ -8,13 +8,14 @@ class Group(DatabaseConnection):
     def __init__(self):
         super().__init__()
 
-    def add_group(self, admin_id, group_name, user_role):
+    def add_group(self, admin_id, group_name):
         command = """INSERT INTO GROUPS (
             user_id, group_name, user_role, createdOn) VALUES(
-                '{}','{}','{}','{}')
-        """.format(admin_id, group_name, user_role, datetime.now())
+                '{}','{}','{}','{}') RETURNING * ;
+        """.format(admin_id, group_name, "admin", datetime.now())
         self.cursor.execute(command)
-        return "group created"
+        data = self.cursor.fetchone()
+        return data
 
     def search_group(self, id):
         command = """
@@ -30,11 +31,11 @@ class Group(DatabaseConnection):
         self.cursor.execute(command)
         return "message deleted"
 
-    def add_user_to_group(self, user_id, group_id, user_role):
+    def add_user_to_group(self, user_id, group_id):
         command = """INSERT INTO members (
             user_id, group_id, user_role, createdOn) VALUES(
-                '{}','{}','{}','{}') RETURNING *;
-        """.format(user_id, group_id, user_role, datetime.now())
+                '{}','{}','{}','{}') RETURNING * ;
+        """.format(user_id, group_id, "user", datetime.now())
         self.cursor.execute(command)
         data = self.cursor.fetchone()
         return data
@@ -46,47 +47,30 @@ class Group(DatabaseConnection):
         self.cursor.execute(command)
         return "user deleted"
 
-    def get_that_group(self, group_name):
-        """return group information"""
-        command =  "SELECT row_to_json(groups) FROM groups WHERE group_name='%s'" % (group_name)
-        self.cursor.execute(command, (group_name))
-        result = self.cursor.fetchone()
-        if not result:
-            return "message not saved"
-        return result
-
     def send_message_to_group(self, group_id, subject, message, parentMessageID, status, read):
         """add message to a group"""
         command = """INSERT INTO GROUP_MESSAGES (
             group_id, subject, message, parentMessageID, status, read, createdon)
-        VALUES('{}', '{}','{}', '{}', '{}', '{}','{}')
+        VALUES('{}', '{}','{}', '{}', '{}', '{}','{}') RETURNING *;
         """.format(
             group_id, subject, message, parentMessageID, status, read, datetime.now())
         self.cursor.execute(command)
-
-    def get_that_message(self, subject):
-        """return group information"""
-        command =  "SELECT row_to_json(group_messages) FROM group_messages WHERE subject='%s'" % (subject)
-        self.cursor.execute(command, (subject))
-        result = self.cursor.fetchone()
-        if not result:
-            return "message not saved"
-        return result
-
-    def get_user(self, user_id):
-        """return group information"""
-        command =  "SELECT row_to_json(members) FROM members WHERE user_id='%s'" % (user_id)
-        self.cursor.execute(command, (user_id))
-        result = self.cursor.fetchone()
-        if not result:
-            return "message not saved"
-        return result
+        data = self.cursor.fetchone()
+        return data
 
     def get_all_groups(self):
         command = """
         SELECT * FROM GROUPS""".format()
         self.cursor.execute(command)
         data = self.cursor.fetchall()
+        return data
+
+    def admin_update_group_name(self, group_id, group_name):
+        """Admin updates a group name."""
+        command = """UPDATE GROUPS SET group_name = %s WHERE id= %s RETURNING * ;
+        """
+        self.cursor.execute(command,(group_name, group_id))
+        data = self.cursor.fetchone()
         return data
 
     
