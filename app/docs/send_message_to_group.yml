@@ -1,12 +1,10 @@
-Send emails to individuals
----
 tags:
-  - emails
+  - groups
 parameters:
   - in: body
     name: body
     type: object
-    description: This endpoint is helps a user to send an email to an individual. The user provides subject, message, status, sender_id, receiver_id for them to send an email
+    description: This endpoint is helps a user to send message to a group. The user provides subject, message, parentMessageID, status for them to send a group
   
   
   - in: header
@@ -22,8 +20,8 @@ parameters:
       required:
         - subject
         - message
+        - parentMessageID
         - status
-        - sender_id
       type: object
       properties:
         subject:
@@ -32,22 +30,17 @@ parameters:
         message:
           type: string
           example: the day we last met was yesterday! rite
-        status:
+        parentMessageID:
           type: string
           example: sent
-        sender_id:
+        status:
           type: integer
           example: 3
-        receiver_id:
-          type: integer
-          example: 1  
 responses:
   201:
-    description: Users provide the subject, message, status, sender_id, receiver_id for them to send an email
+    description: Users provide the subject, message, parentMessageID, status for them to send a message
   400:
     description: Empty fields or invalid email or short password.
-  404:
-    description: User doesnt exist.
 
 security:
   - JWT:

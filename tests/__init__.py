@@ -10,3 +10,8 @@ user_login = {
     "password": "1988ch"
 
 }
+admin_login = {
+    "email": "kyakusahmed@gmail.com",
+    "password": "1988ch"
+
+}
