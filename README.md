@@ -85,7 +85,7 @@ $ python run.py
 |user delete group|api/v1/groups/<int:group_id>|DELETE|group_id|
 |add user to group|api/v1/groups/<int:id>/users|POST|id|
 |delete user from group|api/groups/<int:group_id>/users/<int:user_id>|DELETE| group_id, user_id|
-|send message to a group|api/v1/groups/<int:group_id>/messages|group_id|
+|send message to a group|api/v1/groups/<int:group_id>/messages|POST|group_id|
 
 
 
