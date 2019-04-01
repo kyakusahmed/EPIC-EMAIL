@@ -21,8 +21,13 @@ login_form.addEventListener('submit', function(event){
     .then(function(response){
         if (response.error){
             document.getElementById("add").innerHTML = response.error
+        } else if (response.data[0]['access_token']){
+            alert(response.message)
+            window.location.replace("./main.html")
+            let token = response.data[0]["access_token"]
+            localStorage.setItem("token", token)
         }
-    })
+    }) 
     
     })
         
