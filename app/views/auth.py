@@ -41,11 +41,7 @@ def create_user_account():
         data['email'],
         data['password']
     )
-    new_user = [{
-        "use"
-        "user": user_info
-        }]
-    return jsonify({"data": new_user, "status": 201}), 201
+    return jsonify({"message": user_info, "status": 201}), 201
   
   
 @app.route('/api/v1/auth/login', methods=['POST'])
@@ -67,5 +63,5 @@ def signin_user():
             "status": 200, "message": "wrong password or email"
             }), 200
     access_token = [{'access_token':create_access_token(identity=check_user)}]
-    return jsonify({'status': 200, 'data': access_token}), 200
+    return jsonify({'status': 200, "message": "login successfull", 'data': access_token}), 200
 
