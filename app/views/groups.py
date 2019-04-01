@@ -20,7 +20,7 @@ validator = Validation()
 def create_group():
     """send email to an individual."""
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
     validate_info = validator.input_data_validation([
         'group_name'
@@ -67,7 +67,7 @@ def delete_group(id):
 def delete_user_from_group(group_id, user_id):
     """delete user's group"""
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"status": 401, "message": "unauthorized access"})
     search_group = group.search_group(group_id)
     if not search_group:
@@ -87,7 +87,7 @@ def delete_user_from_group(group_id, user_id):
 def add_user_to_group(id):
     """send email to an individual."""
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
     validate_credentials = validator.input_data_validation(['user_id'])
     if validate_credentials:
@@ -100,10 +100,6 @@ def add_user_to_group(id):
         return jsonify({
             "data_type_error": "please enter an integer",
             "status": 400
-            }), 400
-    if current_user[0] == data['user_id']:
-        return jsonify({
-            "status": 400, "message": "you are an administrator of this group"
             }), 400
     check_user = user.search_user_by_id(data['user_id'])
     if not check_user:
@@ -132,7 +128,7 @@ def add_user_to_group(id):
 def send_message_to_group(group_id):
     """send email to an individual."""
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
     validate_credentials = validator.input_data_validation([
         'subject', 'message', 'status'])
@@ -179,7 +175,7 @@ def send_message_to_group(group_id):
 def get_all_groups():
     """fetch all user received messages"""
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
     all_groups = group.get_all_groups()
     groups = []
@@ -203,7 +199,7 @@ def update_group_name(group_id):
     """delete user's group"""
     
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"status": 401, "message": "unauthorized access"})
     
     search_group = group.search_group(group_id)

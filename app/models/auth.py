@@ -45,4 +45,11 @@ class User(DatabaseConnection):
         user = self.cursor.fetchone()
         return user
 
+    def search_user_by_id(self, id):
+        command = """
+        SELECT * FROM USERS WHERE id ='{}'
+        """.format(id)
+        self.cursor.execute(command)
+        user = self.cursor.fetchone()
+        return user
     
