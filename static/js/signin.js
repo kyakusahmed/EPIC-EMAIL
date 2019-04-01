@@ -19,19 +19,10 @@ login_form.addEventListener('submit', function(event){
         return response.json()
     })
     .then(function(response){
-        console.log(response)
-        if (response.data[0]['access_token']) {
-            alert(response.data[0]['access_token'])
-            // window.location.replace('../templates/main.html')
-            let token = response.data[0]['access_token']
-            localStorage.setItem("token", token)
-        } else if (response.error) {
+        if (response.error){
             document.getElementById("add").innerHTML = response.error
-        } 
+        }
     })
-    .catch(function(error){
-        console.log(error)
-    })
-
     
-})
+    })
+        
