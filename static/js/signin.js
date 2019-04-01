@@ -22,9 +22,10 @@ login_form.addEventListener('submit', function(event){
         if (response.error){
             document.getElementById("add").innerHTML = response.error
         } else if (response.data[0]['access_token']){
+            console.log(response.data[0]['access_token'])
             alert(response.message)
             window.location.replace("./main.html")
-            let token = response.data[0]["access_token"]
+            let token = response.data[0]['access_token']
             localStorage.setItem("token", token)
         }
     }) 
