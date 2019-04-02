@@ -9,26 +9,34 @@ class Messages(DatabaseConnection):
     def __init__(self):
         super().__init__()
 
-    def add_message(self, subject, message, parentMessageID, status, sender_id, receiver_id, read):
-        command = """INSERT INTO MESSAGES (subject, message, parentMessageID, status, user_id, receiver_id, read, createdon)
+    def add_message(self, subject, message, parentMessageID, status, sender_id, receiver_email, read):
+        command = """INSERT INTO MESSAGES (subject, message, parentMessageID, status, user_id, receiver_email, read, createdon)
         VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') RETURNING*;
-        """.format(subject, message, parentMessageID, status, sender_id, receiver_id, read, datetime.now())
+        """.format(subject, message, parentMessageID, status, sender_id, receiver_email, read, datetime.now())
         self.cursor.execute(command)
         data = self.cursor.fetchone()
         return data
 
-    def get_user_received_messages(self, receiver_id, status, read):
+    def get_user_received_messages(self, receiver_email, status):
         command = """
-        SELECT * FROM MESSAGES WHERE receiver_id = {} AND status = 'read' or read = False 
-        """.format(receiver_id, status, read)
+        SELECT * FROM MESSAGES WHERE receiver_email = '{}' AND status = '{}'
+        """.format(receiver_email, 'read')
         self.cursor.execute(command)
         data = self.cursor.fetchall()
         return data
 
+    def get_user_unread_messages(self, receiver_email, read):
+        command = """
+        SELECT * FROM MESSAGES WHERE receiver_email = '{}' AND read = '{}'
+        """.format(receiver_email, False)
+        self.cursor.execute(command)
+        data = self.cursor.fetchall()
+        return data    
+
     def get_sent_messages(self, status, user_id):
         try:
             command = """
-            SELECT * FROM MESSAGES WHERE status = 'sent' and user_id = {}
+            SELECT * FROM MESSAGES WHERE STATUS = 'sent' and user_id = {}
             """.format(user_id, status)
             self.cursor.execute(command)
             data = self.cursor.fetchall()
@@ -51,9 +59,9 @@ class Messages(DatabaseConnection):
         data = self.cursor.fetchone()
         return data
 
-    def get_data(self, receiver_id):
-        command =  "SELECT row_to_json(messages) FROM messages WHERE receiver_id='%s'" % (receiver_id)
-        self.cursor.execute(command, (receiver_id))
+    def get_data(self, receiver_email):
+        command =  "SELECT row_to_json(messages) FROM messages WHERE receiver_email='%s'" % (receiver_email)
+        self.cursor.execute(command, (receiver_email))
         result = self.cursor.fetchone()
         if not result:
             return "message not saved"

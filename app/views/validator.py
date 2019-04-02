@@ -16,9 +16,9 @@ class Validation:
             input = request.get_json()
             email_validation = re.compile(
                 "(^[a-zA-Z0-9_.]+@[a-zA-Z0-9_.]+\.[a-z]+$)")
-            message = x.strip() + ' is required'
             if not input[x]:
-                return {'field': x, 'message': message}
+                message = x.strip() + ' is required'
+                return  message
             elif x.strip() == 'password' and len(input[x].strip()) < 5:
                 message = 'password should be atleast five characters'
                 return message

@@ -33,19 +33,16 @@ def create_user_account():
     registered = user.get_user_by_email(data['email'])
     if registered:
         return jsonify({
-            "status": 200, "message": "user registered already"
-            }), 200
+            "status": 400, "error": "user registered already"
+            }), 400
     user_info = user.create_user_account(
         data['firstname'],
         data['lastname'],
         data['email'],
         data['password']
     )
-    new_user = [{
-        "use"
-        "user": user_info
-        }]
-    return jsonify({"data": new_user, "status": 201}), 201
+    
+    return jsonify({"message": user_info, "status": 201}), 201
   
   
 @app.route('/api/v1/auth/login', methods=['POST'])
@@ -57,15 +54,15 @@ def signin_user():
         ])
     if validate_credentials:
         return jsonify({
-            "message": 'Validation error',
-            "errors": validate_credentials
+            "status": 400,
+            "error": validate_credentials
         }), 400
     data = request.get_json()
     check_user = user.user_signin(data['email'].strip(), data['password'])
     if not check_user:
         return jsonify({
-            "status": 200, "message": "wrong password or email"
+            "status": 200, "error": "wrong password or email"
             }), 200
     access_token = [{'access_token':create_access_token(identity=check_user)}]
-    return jsonify({'status': 200, 'data': access_token}), 200
+    return jsonify({'status': 200, "message": "login successfull", 'data': access_token}), 200
 

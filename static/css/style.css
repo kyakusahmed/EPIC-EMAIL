@@ -1,0 +1,475 @@
+body {
+background-color: white;
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+width: 100%;
+min-height: 100vh;
+}
+.topnav {
+overflow: hidden;
+background-color:#f0a417;
+color: green;
+padding: 0 100px;
+margin: 10px;
+border-radius: 5px;
+}
+.topnav h1{
+float: left;
+padding: -2px;
+color:  #ffffff;
+font-size: 24px;
+}
+.topnav .logo a{
+    float: left;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 18px;
+    text-decoration: none;
+}
+.topnav .nav {
+float: right;
+display: block;
+color: white;
+text-align: center;
+padding:  22px;
+text-decoration: none;
+font-size: 16px;
+}
+.topnav .nav:hover {
+background-color: grey;
+color: #ffffff;
+}
+.topnav a.active {
+background-color: grey;
+color: #ffffff;
+float: right;
+display: block;
+text-align: center;
+padding:  22px;
+text-decoration: none;
+}
+.whole{
+background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/black.jpg");
+background-repeat: repeat-x;
+background-size: contain;
+padding: 50px;
+display: flex;
+margin: 10px 10px;
+border-radius: 5px;
+}
+.one{
+flex: 2;
+height: 510px;
+color: white;
+font-size: 20px; 
+margin: 10px;
+background-color: grey;
+border: 1px solid #f0a417;
+border-radius: 10px;
+
+}
+.auth{
+flex: 2;
+height: 510px;
+color: white;
+font-size: 20px; 
+margin: 10px;
+}
+.auth h2{
+margin: 60px 0 20px 180px;
+}
+.auth p{
+margin: 0 30px 0 40px;
+font-size: 29PX;
+}
+.one h2{
+margin: 60px 0 20px 180px;
+}
+.one p{
+margin: 0 30px 0 40px;
+font-size: 29PX;
+}
+.two{
+flex: 2;
+background-color: rgb(red, green, blue);
+height: 510px;
+}
+form{
+position: relative;
+z-index: 1;
+max-width: 760px;
+margin: 0 auto 80px;
+padding: 22px;
+text-align: center;
+margin-top: 45px;
+color: #ffffff;
+
+}
+
+.two form input{
+font-family: "roboto",sans-serif;
+outline: 1;
+background: #f2f2f2;
+width: 80%;
+border: 1px solid #f0a417;
+margin: 5px;
+padding: 15px;
+box-sizing: border-box;
+margin-left: 0px;
+border-radius: 5px;
+}
+.two input:hover{
+border: 1px solid grey;
+}
+.two form .button{
+font-family: "roboto", sans-serif;
+text-transform: uppercase;
+outline: 0;
+width: 80%;
+padding: 10px;
+color: white;
+font-size: 15PX;
+cursor: pointer;
+border: 1px solid #f0a417;
+background-color: #f0a417;
+margin-top: 10px;
+border-radius: 5px;
+margin-left: -4px;
+}
+
+.two form .button:hover, form button:active{
+background-color: grey;
+color: #ffffff;
+}
+form .message{
+margin: 25px;
+color: #f0a417;
+font-weight: 300;
+}
+form .message a{
+    color: white;
+}
+@media screen and (max-width: 1000px) {
+.whole{
+    display: block;
+    margin: auto;
+}
+.one{
+    height: 280px;
+}
+.one h2{
+    margin: 40px 0px 30px 70px;
+}
+.one p{
+    margin: 0 10px 0 10px;
+    font-size: 22PX;
+}
+.topnav a{
+    display: block;
+    float: right;
+
+}
+}
+.whole{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/black.jpg");
+    background-repeat: repeat;
+    background-size: contain;
+}
+@media screen and (max-width: 360px) {
+.whole{
+    display: block;
+    margin: auto;
+}
+.one{
+    height: 280px;
+    width: 100%;
+    margin: 0;
+}
+.one h2{
+    margin: 30px 0px 30px 10px;
+}
+.one p{
+    margin: 0 10px 0 10px;
+    font-size: 18PX;
+}
+.topnav a{
+    display: block;
+    float: right;
+
+}
+.two form input{
+    width: 100%;
+    margin: 5px 0px;
+}
+form{
+    padding: 2px;
+}
+}    
+
+input[type=text] {
+width: 100%;
+padding: 12px;  
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box; 
+margin-top: 6px;
+margin-bottom: 16px;
+resize: vertical;
+}
+input[type=submit] {
+margin: 10px;
+background-color: #f0a417;
+color: white;
+padding: 12px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+
+}
+
+input[type=submit]:hover {
+background-color: #ffd900d5;
+}
+
+.container {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+color: #f0a417;
+margin: auto;
+}
+label{
+color: #f0a417;;
+}
+
+h3{
+color: #f0a417;
+padding: 0 0 20px 0; 
+}
+
+.whole .left {
+height: 530px;
+width: 200px;
+position: relative;
+z-index: 1;
+top: 0;
+left: 0;
+background-color: grey;
+border: 1px solid #f0a417;
+border-radius: 10px;
+overflow-x: hidden;
+padding-top: 20px;
+}
+
+.left a {
+text-decoration: none;
+font-size: 22px;
+color: white;
+display: block;
+text-align: center;
+padding:  22px;
+text-decoration: none;
+}
+
+.left a:hover {
+color:  orange;
+background-color:white;
+}
+.left a.active {
+background-color: #f0a417;
+color: white;
+}
+.right {
+flex: 3;
+margin-left: 10px;
+font-size: 28px;
+padding: 0px 10px;
+border: 1px solid #f0a417;
+border-radius: 10px;
+background-color: #ffffff;
+}
+.right-2 {
+flex: 4;
+height: 450px;
+margin-left: 10px;
+font-size: 28px;
+padding: 0px 10px;
+border: 1px solid #f0a417;
+border-radius: 10px;
+background-color: #ffffff;
+}
+.right form a{
+    text-decoration: none;
+}
+
+@media screen and (max-height: 400px) {
+.sidenav {padding-top: 15px;}
+.sidenav a {font-size: 18px;}
+}
+
+.main     {
+margin: 10px 0;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: flex-start;
+border-bottom: 2px solid #f0a417;
+}
+
+.main .content {
+flex: 1;
+}
+
+.main .content1 {
+flex: 2;
+}
+
+.main .order-button {
+flex: 1;
+border-bottom-style: none;
+}
+@media screen and (max-width: 800px) {
+.whole{
+    padding: 3px;
+}
+.whole .left{
+    width: 100%;
+    height: 400px;
+    margin-left: -3px;
+}
+.right{
+    width: 100%;
+    margin-left: -10px;
+    height: 550px;
+}
+.main {
+    font-size: 14px;
+}
+.right form .sender-details p{
+    font-size:18px; 
+}
+.right form .body p{
+    font-size: 25px;
+}
+}
+.order-button a{
+border-bottom-style: none;
+text-decoration: none;
+color: grey;
+padding: 0px 0px 0px 20px;
+}
+.order-button a img{
+    width: 25px;
+    height: 25px;
+}
+.order-button a:hover {
+color:  orange;
+}
+input[type=text], textarea {
+width: 100%;
+padding: 12px;   
+border: 1px solid #f0a417;
+border-radius: 4px; 
+box-sizing: border-box; 
+margin-top: 3px; 
+margin-bottom: 0px;
+resize: vertical;
+box-shadow:0 0 10px #f0a417  inset;
+}
+textarea{
+    height: 150px;
+}
+
+input[type=submit] {
+background-color:#f0a417;
+color: white;
+padding: 12px 40px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 5px;
+}
+
+input[type=submit]:hover {
+background-color: #ff9900;
+color: white;
+}
+input:focus {
+    outline: none;
+  }
+textarea:focus{
+    outline: none;
+}
+.right form{
+position: relative;
+z-index: 1;
+max-width: 760px;
+margin: 0 auto 80px;
+padding: 22px;
+text-align: center;
+margin-top: 30px;
+color: #ffffff;
+margin-bottom: -10px;
+}
+.right h4{
+    text-align: center;
+    color: grey;
+    padding-top: -50px;
+}
+.sixth .groupname p{
+    color: #808080;
+    border-bottom: 2px solid #f0a417;
+}
+.sixth .groupname p span{
+    padding-left: 60px;
+}
+
+.sixth .field{
+    display: inline-block;
+    margin: 0px 0 20px 0px;
+    height: 22px;
+}
+.field label{
+    margin-left: 0px;
+}
+.field select{
+    width: 200px;
+}
+.field a{
+    margin: 0px 0px 0px 20px;
+}
+.right form label{
+    color: black;
+}
+.right h4{
+    color: black;
+}
+.right form .subj p{
+    color: grey;
+    margin: 0px auto;
+    margin-top: 0px;
+}
+.right form {
+    border: 1px solid orange;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #f0a417  inset;
+}
+.right form .sender-details p{
+    color: black;
+    margin: 0px auto;
+}
+.right form .body p{
+    color: black;
+    margin: 20px auto;
+}
+.right form .subj span{
+    color: orange;
+}
+.right form .sender-details span{
+    color: #f0a417;
+}
+form .add{
+    padding: 5px;
+    background-color: aquamarine;
+}

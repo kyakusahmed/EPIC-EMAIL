@@ -21,19 +21,15 @@ def send_message_to_individual():
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
     validate_credentials = validator.input_data_validation([
-        'subject', 'message', 'status', 'receiver_id'])
+        'subject', 'message', 'status', 'receiver_email'])
     if validate_credentials:
         return jsonify({
             "message": 'Validation error',
             "errors": validate_credentials
         }), 400
     data = request.get_json()
-    if type(data['receiver_id']) is not int:
-        return jsonify({
-            "data_type_error": "please enter an integer",
-            "status": 400
-            }), 400
-    user_search = user.search_user_by_id(data['receiver_id'])
+
+    user_search = user.search_user_by_email(data['receiver_email'])
     if not user_search:
         return jsonify({
             "status": 404, "message": "Recipient does not exist"
@@ -44,7 +40,7 @@ def send_message_to_individual():
         data['parentMessageID'],
         data["status"],
         current_user[0],
-        data['receiver_id'],
+        data['receiver_email'],
         False
         )
     return jsonify({"status": 201, "message": { 
@@ -54,7 +50,7 @@ def send_message_to_individual():
         'message': send_message[3],
         'parentMessageID': send_message[4],
         'status': send_message[5],
-        'receiver_id': send_message[6],
+        'receiver_email': send_message[6],
         'read': send_message[7],
         'createdon': send_message[8]}
         }), 201
@@ -68,7 +64,7 @@ def get_all_user_unread_emails():
     current_user = get_jwt_identity()
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
-    unread_messages = messages.get_user_received_messages(current_user[0], 'status', 'read')
+    unread_messages = messages.get_user_unread_messages(current_user[3], 'read')
     unread_emails = []
     for key in range(len(unread_messages)):
         unread_emails.append({
@@ -78,7 +74,7 @@ def get_all_user_unread_emails():
             'message': unread_messages[key][3],
             'parentMessageID': unread_messages[key][4],
             'status': unread_messages[key][5],
-            'receiver_id': unread_messages[key][6],
+            'receiver_email': unread_messages[key][6],
             'read': unread_messages[key][7],
             'createdon': unread_messages[key][8]
         })
@@ -93,7 +89,7 @@ def get_user_received_messages():
     current_user = get_jwt_identity()
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
-    received_messages = messages.get_user_received_messages('receiver_id', 'status', 'read')
+    received_messages = messages.get_user_received_messages(current_user[3], 'status')
     received = []
     for key in range(len(received_messages)):
         received.append({
@@ -103,13 +99,13 @@ def get_user_received_messages():
             'message': received_messages[key][3],
             'parentMessageID': received_messages[key][4],
             'status': received_messages[key][5],
-            'receiver_id': received_messages[key][6],
+            'receiver_email': received_messages[key][6],
             'read': received_messages[key][7],
             'createdon': received_messages[key][8]
         })
     return jsonify({"status": 200, "messages_received": received}), 200
 
-  
+
 @app.route('/api/v1/messages/sent', methods=['GET'])
 @jwt_required
 def get_user_sent_messages():
@@ -127,7 +123,7 @@ def get_user_sent_messages():
             'message': sent_messages[key][3],
             'parentMessageID': sent_messages[key][4],
             'status': sent_messages[key][5],
-            'receiver_id': sent_messages[key][6],
+            'receiver_email': sent_messages[key][6],
             'read': sent_messages[key][7],
             'createdon': sent_messages[key][8]
         })
@@ -152,7 +148,7 @@ def get_specific_user_message(message_id):
         'message': search_message[3],
         'parentMessageID': search_message[4],
         'status': search_message[5],
-        'receiver_id': search_message[6],
+        'receiver_email': search_message[6],
         'read': search_message[7],
         'createdon': search_message[8]
     }})

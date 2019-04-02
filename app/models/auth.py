@@ -37,10 +37,10 @@ class User(DatabaseConnection):
         user = self.cursor.fetchone()
         return user
 
-    def search_user_by_id(self, id):
+    def search_user_by_email(self, email):
         command = """
-        SELECT * FROM USERS WHERE ID ='{}'
-        """.format(id)
+        SELECT * FROM USERS WHERE email ='{}'
+        """.format(email)
         self.cursor.execute(command)
         user = self.cursor.fetchone()
         return user

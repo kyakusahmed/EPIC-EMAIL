@@ -40,14 +40,12 @@ class Migration(DatabaseConnection):
                 MESSAGE VARCHAR(1000) NOT NULL,
                 PARENTMESSAGEID INTEGER,
                 STATUS VARCHAR(25) NOT NULL,
-                RECEIVER_ID INTEGER,
-                FOREIGN KEY(RECEIVER_ID) REFERENCES USERS(ID),
+                RECEIVER_EMAIL VARCHAR(25) NOT NULL,
                 READ BOOLEAN,
                 createdOn timestamp(6) without time zone
                 )
             """,
-            """
-                CREATE TABLE IF NOT EXISTS GROUPS (
+            """ CREATE TABLE IF NOT EXISTS GROUPS (
                 ID SERIAL PRIMARY KEY UNIQUE,
                 USER_ID INTEGER,
                 FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
@@ -56,8 +54,7 @@ class Migration(DatabaseConnection):
                 createdOn timestamp(6) without time zone
                 )
             """,
-            """
-                CREATE TABLE IF NOT EXISTS MEMBERS (
+            """ CREATE TABLE IF NOT EXISTS MEMBERS (
                 ID SERIAL PRIMARY KEY UNIQUE,
                 USER_ID INTEGER,
                 FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
