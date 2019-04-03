@@ -7,7 +7,7 @@ login_form.addEventListener('submit', function(event){
     var email = document.getElementById('email').value
     var password = document.getElementById('password').value
 
-    fetch('https://epemail.herokuapp.com/api/v1/auth/login', {
+    fetch('http://127.0.0.1:5000/api/v1/auth/login', {
         method:'POST',
         headers: {'Content-Type' : 'application/json'},
         body:JSON.stringify({

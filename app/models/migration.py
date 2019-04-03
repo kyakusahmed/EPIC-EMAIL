@@ -56,8 +56,7 @@ class Migration(DatabaseConnection):
             """,
             """ CREATE TABLE IF NOT EXISTS MEMBERS (
                 ID SERIAL PRIMARY KEY UNIQUE,
-                USER_ID INTEGER,
-                FOREIGN KEY(USER_ID) REFERENCES USERS(ID),
+                EMAIL VARCHAR(50),
                 GROUP_ID INTEGER,
                 FOREIGN KEY(GROUP_ID) REFERENCES GROUPS(ID),
                 USER_ROLE VARCHAR(10) NOT NULL,

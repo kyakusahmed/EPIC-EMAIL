@@ -31,11 +31,11 @@ class Group(DatabaseConnection):
         self.cursor.execute(command)
         return "message deleted"
 
-    def add_user_to_group(self, user_id, group_id):
+    def add_user_to_group(self, email, group_id):
         command = """INSERT INTO members (
-            user_id, group_id, user_role, createdOn) VALUES(
+            email, group_id, user_role, createdOn) VALUES(
                 '{}','{}','{}','{}') RETURNING * ;
-        """.format(user_id, group_id, "user", datetime.now())
+        """.format(email, group_id, "user", datetime.now())
         self.cursor.execute(command)
         data = self.cursor.fetchone()
         return data

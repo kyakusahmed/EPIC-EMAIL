@@ -52,4 +52,14 @@ class User(DatabaseConnection):
         self.cursor.execute(command)
         user = self.cursor.fetchone()
         return user
+
+    def get_all_users(self):
+        command = """
+        SELECT * FROM USERS 
+        """.format()
+        self.cursor.execute(command)
+        data = self.cursor.fetchall()
+        return data
+
+
     

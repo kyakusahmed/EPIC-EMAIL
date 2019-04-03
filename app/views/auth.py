@@ -66,3 +66,25 @@ def signin_user():
     access_token = [{'access_token':create_access_token(identity=check_user)}]
     return jsonify({'status': 200, "message": "login successfull", 'data': access_token}), 200
 
+
+@app.route('/api/v1/auth', methods=['GET'])
+@jwt_required
+def get_all_users():
+    """fetch all users."""
+    current_user = get_jwt_identity()
+    if current_user[6] != "user":
+        return jsonify({"message": "unauthorized access"})
+    get_users = user.get_all_users()
+    users = []
+    for key in range(len(get_users)):
+        users.append({
+            'id': get_users[key][0],
+            'firstname': get_users[key][1],
+            'lastname': get_users[key][2],
+            'email': get_users[key][3],
+            'password': get_users[key][4],
+            'phone_number': get_users[key][5],
+            'role': get_users[key][6],
+            'createdon': get_users[key][7]
+        })
+    return jsonify({"status": 200, "messages_sent": users}), 200

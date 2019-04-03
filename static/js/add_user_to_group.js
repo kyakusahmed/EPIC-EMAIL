@@ -1,26 +1,22 @@
 let token = localStorage.getItem("token")
-var new_message = document.getElementById('new_message')
 
-new_message.addEventListener('submit', function(event){
+var select_form = document.getElementById('select_form')
+
+select_form.addEventListener('submit', function(event){
     //prevent pager load
     event.preventDefault()
 
-    var subject = document.getElementById('subject').value
-    var message = document.getElementById('message').value
-    var receiver_email = document.getElementById('To').value
+    var email = document.getElementById('group').value
+    var group_id = document.getElementById('id').value
 
-    fetch('http://127.0.0.1:5000/api/v1/messages', {
+    fetch('http://127.0.0.1:5000/api/v1/groups/'+ group_id +'/users', {
         method:'POST',
         headers: {
             'Content-Type' : 'application/json',
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
         body:JSON.stringify({
-            subject: subject,
-            message: message,
-            parentMessageID: 0,
-            status: "sent",
-            receiver_email: receiver_email
+            'email': email
         })
     })
     .then(function(response){
@@ -28,13 +24,14 @@ new_message.addEventListener('submit', function(event){
     })
     .then(function(response){
         if (response.status === 201) {
-            alert("message sent")
+            alert("user added")
+            window.location.replace("./ad-grp.html")
         }
         if (response.errors) {
             document.getElementById("add").innerHTML = response.errors
         }
-        if (response.message === "Recipient does not exist") {
-            document.getElementById("add").innerHTML = "Recipient does not exist"
+        if (response.message === "unable to find user") {
+            document.getElementById("add").innerHTML = "unable to find user"
         }
         if (response.msg) {
             alert("Missing Authorization Header")

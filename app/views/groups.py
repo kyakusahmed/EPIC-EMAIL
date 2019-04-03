@@ -89,19 +89,14 @@ def add_user_to_group(id):
     current_user = get_jwt_identity()
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
-    validate_credentials = validator.input_data_validation(['user_id'])
+    validate_credentials = validator.input_data_validation(['email'])
     if validate_credentials:
         return jsonify({
             "message": 'Validation error',
             "errors": validate_credentials
         }), 400
     data = request.get_json()
-    if type(data['user_id']) is not int:
-        return jsonify({
-            "data_type_error": "please enter an integer",
-            "status": 400
-            }), 400
-    check_user = user.search_user_by_id(data['user_id'])
+    check_user = user.search_user_by_email(data['email'])
     if not check_user:
         return jsonify({"status": 404, "message": "unable to find user"}), 404        
     group_search = group.search_group(id)
@@ -110,12 +105,12 @@ def add_user_to_group(id):
             "status": 404, "message": "unable to find this group"
             }), 404
     send_message = group.add_user_to_group(
-        data['user_id'],
+        data['email'],
         id
         )
     return jsonify({"status": 201, "data": {
         'id': send_message[0],
-        'user_id': send_message[1],
+        'email': send_message[1],
         'group_id': send_message[2],
         'user_role': send_message[3],
         'createdOn': send_message[4]
