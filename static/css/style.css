@@ -473,3 +473,7 @@ form .add{
     padding: 5px;
     background-color: aquamarine;
 }
+.right form {
+    color: red;
+    font-size: 20px;
+}

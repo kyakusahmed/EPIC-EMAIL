@@ -13,20 +13,21 @@
             <a href="signin.html">Epic Email</a>   
         </div>
         <a href="signin.html" class="nav">SignOut</a>
+        <a href="main.html" class="nav">Inbox</a>
     </div>
     <div class="whole">
         <div class="left">
-            <a href="ad-grp.html">Groups<span>(2)</span></a>
             <a href="Home#" class="active">Create-Groups</a>
         </div>
         <div class="right">
-            <form action="ad-grp.html" class="">
+            <form action="ad-grp.html" id="create_group">
+                <div id="add"></div>
                 <label for="group">Create Group</label>
-                <input type="text" id="group" name="group" placeholder="enter new group name..." required>
+                <input type="text" id="group" placeholder="enter new group name...">
                 <input type="submit" value="Create Group">
             </form>    
         </div>
     </div>
-    <script src="../static/js/admin.js"></script>
+    <script src="../static/js/create_grp.js"></script>
 </body>
 </html>
