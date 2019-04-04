@@ -3,7 +3,7 @@ let token = localStorage.getItem("token");
 var whole = document.getElementById("whole");
 
 document.addEventListener("DOMContentLoaded", function() {
-  fetch("http://127.0.0.1:5000/api/v1/messages/received", {
+  fetch("https://epemail.herokuapp.com/api/v1/messages/received", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(function(response) {
       console.log(response);
-      if (response.received_messages) {
+      if (response.messages_received) {
         let sentMailsDiv = document.getElementById("sent_mails");
 
-        for (let item of response.messages_sent) {
+        for (let item of response.messages_received) {
           let mailDiv = document.createElement("div");
           mailDiv.classList.add("main");
           mailDiv.innerHTML =

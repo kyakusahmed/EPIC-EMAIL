@@ -7,7 +7,7 @@ create_group.addEventListener('submit', function(event){
 
     var group_name = document.getElementById('group').value
 
-    fetch('http://127.0.0.1:5000/api/v1/groups', {
+    fetch('https://epemail.herokuapp.com/api/v1/groups', {
         method:'POST',
         headers: {
             'Content-Type' : 'application/json',

@@ -9,7 +9,7 @@ new_message.addEventListener('submit', function(event){
     var message = document.getElementById('message').value
     var receiver_email = document.getElementById('To').value
 
-    fetch('http://127.0.0.1:5000/api/v1/messages', {
+    fetch('https://epemail.herokuapp.com/api/v1/messages', {
         method:'POST',
         headers: {
             'Content-Type' : 'application/json',
