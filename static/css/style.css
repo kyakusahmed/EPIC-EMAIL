@@ -315,6 +315,7 @@ flex-direction: row;
 flex-wrap: nowrap;
 justify-content: flex-start;
 border-bottom: 2px solid #f0a417;
+font-size: 20px;
 }
 
 .main .content {
@@ -344,7 +345,7 @@ border-bottom-style: none;
     height: 550px;
 }
 .main {
-    font-size: 14px;
+    font-size: 5px;
 }
 .right form .sender-details p{
     font-size:18px; 
