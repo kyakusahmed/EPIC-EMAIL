@@ -24,10 +24,10 @@ signup_form.addEventListener('submit', function(event){
     })
     .then(function(response){
         if (response.message) {
-            document.getElementById("add").innerHTML = response.message
+            document.getElementById("postive").innerHTML = response.message
             window.location.replace('../templates/signin.html')
         } else if (response.error) {
-            document.getElementById("add").innerHTML = response.error
+            document.getElementById("negative").innerHTML = response.error
         }
     })
     .catch(function(error){

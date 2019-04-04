@@ -31,10 +31,10 @@ new_message.addEventListener('submit', function(event){
             alert("message sent")
         }
         if (response.errors) {
-            document.getElementById("add").innerHTML = response.errors
+            document.getElementById("negative").innerHTML = response.errors
         }
         if (response.message === "Recipient does not exist") {
-            document.getElementById("add").innerHTML = "Recipient does not exist"
+            document.getElementById("negative").innerHTML = "Recipient does not exist"
         }
         if (response.msg) {
             alert("Missing Authorization Header")

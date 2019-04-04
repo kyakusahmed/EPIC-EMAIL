@@ -22,18 +22,18 @@ create_group.addEventListener('submit', function(event){
     })
     .then(function(response){
         if (response.status === 201) {
-            document.getElementById("add").innerHTML = "group added"
+            document.getElementById("postive").innerHTML = "group added"
             window.location.replace("./ad-grp.html")
         }
         if (response.errors) {
-            document.getElementById("add").innerHTML = response.errors
+            document.getElementById("negative").innerHTML = response.errors
         }
         if (response.message === "Recipient does not exist") {
-            document.getElementById("add").innerHTML = "Recipient does not exist"
+            document.getElementById("negative").innerHTML = "Recipient does not exist"
         }
-        if (response.msg) {
+        if (response.msg) {source 
             document.getElementById("add").style.display = "block";
-            document.getElementById("add").innerHTML = "Missing Authorization Header"
+            document.getElementById("negative").innerHTML = "Missing Authorization Header"
         }
     })
     .catch(function(error){

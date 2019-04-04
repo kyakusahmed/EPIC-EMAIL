@@ -473,7 +473,11 @@ form .add{
     padding: 5px;
     background-color: aquamarine;
 }
-.right form {
+.right form .negative{
     color: red;
+    font-size: 20px;
+}
+.right form .postive{
+    color: green;
     font-size: 20px;
 }

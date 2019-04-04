@@ -20,7 +20,7 @@ login_form.addEventListener('submit', function(event){
     })
     .then(function(response){
         if (response.error){
-            document.getElementById("add").innerHTML = response.error
+            document.getElementById("negative").innerHTML = response.error
         } else if (response.data[0]['access_token']){
             console.log(response.data[0]['access_token'])
             alert(response.message)
