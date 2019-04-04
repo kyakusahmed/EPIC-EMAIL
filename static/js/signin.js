@@ -7,7 +7,7 @@ login_form.addEventListener('submit', function(event){
     var email = document.getElementById('email').value
     var password = document.getElementById('password').value
 
-    fetch('https://epemail.herokuapp.com/api/v1/auth/login', {
+    fetch('http://127.0.0.1:5000/api/v1/auth/login', {
         method:'POST',
         headers: {'Content-Type' : 'application/json'},
         body:JSON.stringify({
@@ -20,7 +20,7 @@ login_form.addEventListener('submit', function(event){
     })
     .then(function(response){
         if (response.error){
-            document.getElementById("add").innerHTML = response.error
+            document.getElementById("negative").innerHTML = response.error
         } else if (response.data[0]['access_token']){
             console.log(response.data[0]['access_token'])
             alert(response.message)

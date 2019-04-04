@@ -17,10 +17,10 @@ class Messages(DatabaseConnection):
         data = self.cursor.fetchone()
         return data
 
-    def get_user_received_messages(self, receiver_email, status):
+    def get_user_received_messages(self, receiver_email):
         command = """
-        SELECT * FROM MESSAGES WHERE receiver_email = '{}' AND status = '{}'
-        """.format(receiver_email, 'read')
+        SELECT * FROM MESSAGES WHERE receiver_email = '{}'
+        """.format(receiver_email)
         self.cursor.execute(command)
         data = self.cursor.fetchall()
         return data
@@ -33,11 +33,11 @@ class Messages(DatabaseConnection):
         data = self.cursor.fetchall()
         return data    
 
-    def get_sent_messages(self, status, user_id):
+    def get_sent_messages(self, user_id):
         try:
             command = """
-            SELECT * FROM MESSAGES WHERE STATUS = 'sent' and user_id = {}
-            """.format(user_id, status)
+            SELECT * FROM MESSAGES WHERE user_id = {}
+            """.format(user_id)
             self.cursor.execute(command)
             data = self.cursor.fetchall()
             return data

@@ -9,7 +9,7 @@ new_message.addEventListener('submit', function(event){
     var message = document.getElementById('message').value
     var receiver_email = document.getElementById('To').value
 
-    fetch('https://epemail.herokuapp.com/api/v1/messages', {
+    fetch('http://127.0.0.1:5000/api/v1/messages', {
         method:'POST',
         headers: {
             'Content-Type' : 'application/json',
@@ -31,10 +31,10 @@ new_message.addEventListener('submit', function(event){
             alert("message sent")
         }
         if (response.errors) {
-            document.getElementById("add").innerHTML = response.errors
+            document.getElementById("negative").innerHTML = response.errors
         }
         if (response.message === "Recipient does not exist") {
-            document.getElementById("add").innerHTML = "Recipient does not exist"
+            document.getElementById("negative").innerHTML = "Recipient does not exist"
         }
         if (response.msg) {
             alert("Missing Authorization Header")

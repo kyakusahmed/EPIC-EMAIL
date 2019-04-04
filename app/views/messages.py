@@ -89,7 +89,7 @@ def get_user_received_messages():
     current_user = get_jwt_identity()
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
-    received_messages = messages.get_user_received_messages(current_user[3], 'status')
+    received_messages = messages.get_user_received_messages(current_user[3])
     received = []
     for key in range(len(received_messages)):
         received.append({
@@ -113,7 +113,7 @@ def get_user_sent_messages():
     current_user = get_jwt_identity()
     if current_user[6] != "user":
         return jsonify({"message": "unauthorized access"})
-    sent_messages = messages.get_sent_messages('status', current_user[0])
+    sent_messages = messages.get_sent_messages(current_user[0])
     sent_emails = []
     for key in range(len(sent_messages)):
         sent_emails.append({
