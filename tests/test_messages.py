@@ -10,7 +10,7 @@ class MessagesTest(BaseTest):
         token = self.return_user_token()
         message_info = {
             "subject": "ASKJBFIWBFA", "message": "UIWQUKAJSFIUQNSA",
-            "status": "sent", "sender_id": "abse", "receiver_id": "miun",
+            "status": "sent", "user_id": "abse", "receiver_email": "kyausahmed@outlook.com",
             "read": False
         }
         response = self.app.post(
@@ -25,8 +25,8 @@ class MessagesTest(BaseTest):
             "subject": "ASKJBFIWBFA",
             "message": "UIWQUKAJSFIUQNSA",
             "status": "sent",
-            "sender_id": 2,
-            "receiver_id": 9,
+            "user_id": 1000,
+            "receiver_email": "kyakutatat.gmail.you",
             "read": False
         }
         response = self.app.post(
@@ -56,17 +56,17 @@ class MessagesTest(BaseTest):
         message_info = {
             "subject": "whjtkry",
             "message": "UIWQUKAJSFIUQNSA",
-            "parentMessageID": 1,
+            "parentMessageID": 0,
             "status": "sent",
-            "receiver_id": 1
+            "receiver_email": kyakusahmed@gmail.com
         }
         self.app.post(
             '/api/v1/messages', headers={
                 "Authorization": "Bearer " + token}, json=message_info)
         response = self.app.get(
-            '/api/v1/messages/1', headers={
+            '/api/v1/messages/2', headers={
                 "Authorization": "Bearer " + token})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_get_all_user_unread_emails(self):
         """test user gets unread emails"""

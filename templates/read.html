@@ -12,34 +12,24 @@
         <div class="logo">
             <a href="signin.html">Epic Email</a>   
         </div>
-        <a href="signin.html" class="nav">SignOut</a>
+        <a href="signin.html" class="nav"><span onclick="logout()">SignOut</span></a>
+        <a class="active" href="#home" id="address"></a>
     </div>
     <div class="whole">
         <div class="left">
             <a href="new.html">New Message</a>
-            <a href="main.html">Inbox<span> (4)</span></a>
-            <a href="sent.html">sent<span> (2)</span></a>
-            <a href="draft.html">Draft<span>(2)</span></a>
+            <a href="main.html">Inbox<span id="number"></span></a>
+            <a href="sent.html">sent<span id="num"></span></a>
         </div>
-        <div class="right">
-            <form action="" class="">
-                <div class="subj">
-                    <p><span>subject: </span>Today was $50m:</p>
-                </div>
-                <div class="sender-details">
-                    <p><span>sender-details: </span>jamespeter@outlook.com</p>
-                </div>
-                <div class="body">
-                    <p>Here’s our guide for beginner traders that will put 
-                    the main ideas of the Forex market in a nutshell. 
-                    The forex trader tutorial has been devised by the professional traders of the LiteForex Company 
-                    whose extensive experience helped optimize its structure and contents. The tutorial offers all 
-                    you may need for a quick start of your trading career.</p>
-                </div>
-                <a href="main.html"><input type="submit" value="Delete"></a>
+        <div class="right" id="right">
+            <form action="" id="read-form">
+                <div id="postive"></div>
+                <div id="mail"></div>
             </form>    
         </div>
     </div>
-<script src="../static/js/signup.js"></script>
-</body>
+<script src="../static/js/specific_message.js"></script>
+<script src="../static/js/get_all_messages.js"></script>
+<script src="../static/js/sent.js"></script>
+</script>
 </html>

@@ -1,5 +1,7 @@
 let token = localStorage.getItem("token");
+let email = localStorage.getItem("email");
 var create_group = document.getElementById("create_group");
+address.innerHTML = localStorage.getItem('email')
 
 create_group.addEventListener("submit", function(event) {
   //prevent pager load
@@ -21,6 +23,7 @@ create_group.addEventListener("submit", function(event) {
       return response.json();
     })
     .then(function(response) {
+      address.innerHTML = localStorage.getItem('email')
       if (response.status === 201) {
         document.getElementById("postive").innerHTML = "group added";
         window.location.replace("./ad-grp.html");
@@ -33,7 +36,6 @@ create_group.addEventListener("submit", function(event) {
           "Recipient does not exist";
       }
       if (response.msg) {
-        source;
         document.getElementById("add").style.display = "block";
         document.getElementById("negative").innerHTML =
           "Missing Authorization Header";

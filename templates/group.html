@@ -12,30 +12,28 @@
         <div class="logo">
             <a href="signin.html">Epic Email</a>   
         </div>
-        <a href="signin.html" class="nav">SignOut</a>
+        <a href="signin.html" class="nav"><span onclick="logout()">SignOut</span></a>
+        <a class="active" href="#home" id="address"></a>
     </div>
     <div class="whole">
         <div class="left">
             <a href="new.html">New Message</a>
-            <a href="main.html">Inbox<span> (4)</span></a>
-            <a href="sent.html">sent<span> (2)</span></a>
-            <a href="draft.html">Draft<span>(2)</span></a>
-            <a class="active" href="#home">Groups<span>(2)</span></a>
+            <a href="main.html">Inbox<span></span id="number"></a>
+            <a href="sent.html">sent<span></span id="num"></a>
+            <a class="active" href="#home">Groups<span id="grp"></span></a>
+            <a href="admin.html">Create Group</a>
         </div>
         <div class="right">
-            <form action="sent.html" class="">  
+            <form action="sent.html" id="name">  
                 <h4>Your Groups</h4>
-                <div class="sixth">
-                    <div class="groupname">
-                    <p>Bikobyamukama Sacco</p>
-                    </div>
-                    <div class="groupname">
-                        <p>Bikobyamukama Sacco</p>
-                    </div>
+                <div class="postive" id="post"></div>
+                <div class="sixth" id="sixth">
+
                 </div>
             </form>    
         </div>
     </div>
-<script src="../static/js/signup.js"></script>
+<script src="../static/js/get_all_groups.js"></script>
+<script src="../static/js/sent.js"></script>
 </body>
 </html>

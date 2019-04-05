@@ -1,5 +1,8 @@
 let token = localStorage.getItem("token")
+let email = localStorage.getItem('email')
 var new_message = document.getElementById('new_message')
+address.innerHTML = localStorage.getItem('email')
+
 
 new_message.addEventListener('submit', function(event){
     //prevent pager load
