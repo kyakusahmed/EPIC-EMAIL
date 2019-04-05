@@ -27,6 +27,7 @@ login_form.addEventListener('submit', function(event){
             window.location.replace("./main.html")
             let token = response.data[0]['access_token']
             localStorage.setItem("token", token)
+            localStorage.setItem("email", email)
         }
     }) 
     

@@ -12,15 +12,16 @@
         <div class="logo">
             <a href="signin.html">Epic Email</a>   
         </div>
-        <a href="signin.html" class="nav">SignOut</a>
+        <a href="signin.html" class="nav"><span onclick="logout()">SignOut</span></a>
+        <a class="active" href="#home" id="address"></a>
     </div>
     <div class="whole">
         <div class="left">
             <a class="active" href="#home">New Message</a>
-            <a href="main.html">Inbox<span> (4)</span></a>
-            <a href="sent.html">sent<span> (2)</span></a>
-            <a href="draft.html">Draft<span>(2)</span></a>
-            <a href="group.html">Groups<span>(2)</span></a>
+            <a href="main.html">Inbox<span id="number"></span></a>
+            <a href="sent.html">sent<span id="num"></span></a>
+            <a href="group.html">Groups<span id="grp"></span></a>
+            <a href="admin.html">Create Group</a>
         </div>
         <div class="right">
             <h4>Write new message</h4>
@@ -38,5 +39,8 @@
         </div>
     </div>
 <script src="../static/js/new_message.js"></script>
+<script src="../static/js/get_all_messages.js"></script>
+<script src="../static/js/specific_message.js"></script>
+<script src="../static/js/sent.js"></script>
 </body>
 </html>

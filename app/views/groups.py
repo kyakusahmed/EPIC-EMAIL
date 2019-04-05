@@ -50,7 +50,7 @@ def create_group():
 def delete_group(id):
     """delete user's group"""
     current_user = get_jwt_identity()
-    if current_user[6] != "admin":
+    if current_user[6] != "user":
         return jsonify({"status": 401, "message": "unauthorized access"})
     search_group = group.search_group(id)
     if not search_group:
@@ -187,7 +187,7 @@ def get_all_groups():
             'user_role': all_groups[key][3],
             'createdon': all_groups[key][4]
         })
-    return jsonify({"status": 200, "groups": groups}), 200
+    return jsonify({"status": 200, "number": len(all_groups), "groups": groups}), 200
 
 
 

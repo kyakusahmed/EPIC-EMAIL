@@ -1,6 +1,18 @@
-let token = localStorage.getItem("token");
+function logout() {
+  localStorage.removeItem("token");
+  window.location.replace('./signin.html');
+}
+window.onload = function check_login() {
+  if (token === null) {
+    window.location.replace("./signin.html")
+  }
+}
 
+let token = localStorage.getItem("token");
+let email = localStorage.getItem("email");
 var whole = document.getElementById("whole");
+var num = document.getElementById("num");
+address.innerHTML = localStorage.getItem("email");
 
 document.addEventListener("DOMContentLoaded", function() {
   fetch("https://epemail.herokuapp.com/api/v1/messages/sent", {
@@ -17,7 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log(response);
       if (response.messages_sent) {
         let sentMailsDiv = document.getElementById("sent_mails");
-
+        num.innerHTML = "(" + response.num + ")";
+        address.innerHTML = localStorage.getItem("email");
+        if (response.num < 1) {
+          document.getElementById("postive").innerHTML = "you have no messages"
+        }
         for (let item of response.messages_sent) {
           let mailDiv = document.createElement("div");
           mailDiv.classList.add("main");
@@ -40,10 +56,10 @@ document.addEventListener("DOMContentLoaded", function() {
           sentMailsDiv.appendChild(mailDiv);
           console.log(item.message);
         }
-
       }
     })
     .catch(error => {
       console.log(error);
     });
 });
+

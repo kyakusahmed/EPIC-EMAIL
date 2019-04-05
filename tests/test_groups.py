@@ -42,7 +42,7 @@ class GroupTest(BaseTest):
         }
         self.app.post('/api/v1/groups', headers={"Authorization": "Bearer " + token}, json=group_info)
         user_info = {
-            "user_id": 3,
+           
 	        "user_role": "member"
         }
         response = self.app.post('/api/v1/groups/1/users', headers={"Authorization": "Bearer " + token}, json=user_info)

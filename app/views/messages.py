@@ -103,7 +103,7 @@ def get_user_received_messages():
             'read': received_messages[key][7],
             'createdon': received_messages[key][8]
         })
-    return jsonify({"status": 200, "messages_received": received}), 200
+    return jsonify({"status": 200, "number": len(received), "messages_received": received}), 200
 
 
 @app.route('/api/v1/messages/sent', methods=['GET'])
@@ -127,7 +127,7 @@ def get_user_sent_messages():
             'read': sent_messages[key][7],
             'createdon': sent_messages[key][8]
         })
-    return jsonify({"status": 200, "messages_sent": sent_emails}), 200
+    return jsonify({"status": 200, "num": len(sent_messages), "messages_sent": sent_emails}), 200
 
   
 @app.route('/api/v1/messages/<int:message_id>', methods=['GET'])
@@ -140,7 +140,7 @@ def get_specific_user_message(message_id):
         return jsonify({"message": "unauthorized access"})
     search_message = messages.search_message(message_id)
     if not search_message:
-        return jsonify({"status": 404, "messaege": "message not found"}), 404
+        return jsonify({"status": 404, "error": "message not found"}), 404
     return jsonify({"status": 200, "message": {
         'message_id': search_message[0],
         'user_id': search_message[1],
