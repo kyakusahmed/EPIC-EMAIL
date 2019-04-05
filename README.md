@@ -11,7 +11,7 @@
  
  [API DOCUMENTATION](https://epemail.herokuapp.com/apidocs/#/)
  
- [GH-PAGES](https://kyakusahmed.github.io/EPIC-EMAIL/UI/signin.html)
+ [GH-PAGES](https://kyakusahmed.github.io/EPIC-EMAIL/templates/signup.html)
 
 
 Features as an Admin:
