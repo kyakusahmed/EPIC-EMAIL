@@ -5,18 +5,18 @@ import json
 class MessagesTest(BaseTest):
     """Tests for messages."""
 
-    def test_send_message_to_user_with_sender_id_that_is_not_integer(self):
+    def test_send_message_to_user_with_user_id_that_is_not_integer(self):
         """test sender_id is not integer"""
         token = self.return_user_token()
         message_info = {
-            "subject": "ASKJBFIWBFA", "message": "UIWQUKAJSFIUQNSA",
+            "subject": "ASKJBFIWBFA", "message": "UIWQUKAJSFIUQNSA", "parentMessageId": 0,
             "status": "sent", "user_id": "abse", "receiver_email": "kyausahmed@outlook.com",
             "read": False
         }
         response = self.app.post(
             '/api/v1/messages', headers={
                 "Authorization": "Bearer " + token}, json=message_info)
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
 
     def test_send_message_to_user_doesnot_exist(self):
         """send an email to a user who does not exist"""
@@ -58,7 +58,7 @@ class MessagesTest(BaseTest):
             "message": "UIWQUKAJSFIUQNSA",
             "parentMessageID": 0,
             "status": "sent",
-            "receiver_email": kyakusahmed@gmail.com
+            "receiver_email": "kyakusahmed@gmail.com"
         }
         self.app.post(
             '/api/v1/messages', headers={

@@ -10,12 +10,11 @@ class GroupTest(BaseTest):
         token = self.return_admin_token()
         group_info = {
             "group_name": "finance",
-	        "user_role": "admin"
         }
         response = self.app.post(
             '/api/v1/groups', headers={
                 "Authorization": "Bearer " + token}, json=group_info)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
     def test_delete_group_not_found(self):
         """test delete group"""
@@ -46,7 +45,7 @@ class GroupTest(BaseTest):
 	        "user_role": "member"
         }
         response = self.app.post('/api/v1/groups/1/users', headers={"Authorization": "Bearer " + token}, json=user_info)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
 
     def test_delete_user_from_group(self):
